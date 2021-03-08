@@ -1,3 +1,3 @@
 "# cv19assistant"
 
-Hello! Welcome to my first web application
+Coronavirus assistant is the web application that helps the health system of Bosnia and Herzegovina to fight against the coronavirus (COVID-19) pandemic. The application offers aid for COVID-19 patients during quarantine, doctors when it comes to monitoring the patient's health and police officers in managing quarantines of many patients. CA offers usage of its ordering system, where patients may order groceries, a COVID-19 heatmap which displays the most infected places in his city, latest local and global COVID-19 news and all information related to his health / quarantine status which is updated by his doctor and police officer. 
