@@ -1,3 +1,3 @@
 "# cv19assistant"
 
-hello
+Hello! Welcome to my first web application
