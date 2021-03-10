@@ -6,19 +6,8 @@
   </head>
   <body>
 <?php
-echo ("<h1>Dummy program</h1> <br>");
-echo("Enter your password");
+$friends = array("Kevin", "Karen", "Oscar", "Jim");
+echo count("$friends");
  ?>
- <br>
- <form action="index.php" method="post">
-  Password: <input type="password" name="password">
-   <br>
-   <input type="submit">
-
-
-<?php
-
-echo $_POST("password"); ?>
-
   </body>
 </html>
