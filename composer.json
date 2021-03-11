@@ -1,0 +1,12 @@
+{
+    "name": "ibu/cv19assistant",
+    "description": "Coronavirus assistant project",
+    "license": "Apache2",
+    "authors": [
+        {
+            "name": "nedimbandzovic",
+            "email": "nedim.bandzovic@stu.ibu.edu.ba"
+        }
+    ],
+    "require": {}
+}

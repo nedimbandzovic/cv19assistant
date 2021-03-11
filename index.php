@@ -5,15 +5,6 @@
     <title></title>
   </head>
   <body>
-<?php
-$luckynumbers=array(4,8,15,16,23,42);
-for($index=0; $index<=count($luckynumbers);$index++){
-  echo ("$luckynumbers[$index] <br>");
-
-
-}
-
- ?>
 
   </body>
 </html>
