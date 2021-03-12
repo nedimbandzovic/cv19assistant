@@ -15,6 +15,26 @@ function get_doctor_by_name($name){
 function  get_doctor_by_ID($id){
   return $this->query_unique("SELECT * FROM doctors WHERE DoctorID=:DoctorID", ["DoctorID"=>$id]);
 }
+
+function add_doctor($user){
+
+  $insert= "";
+  $sql = "INSERT INTO doctors (Name, Surname, InstitutionName, PhoneNumber, Address, JMBG, InstitutionPosition, PatientEnrollmentDate, Account_ID) VALUES (:Name, :Surname, :InstitutionName, :PhoneNumber, :Address, :JMBG, :InstitutionPosition, :PatientEnrollmentDate, :Account_ID)";
+  $stmt= $this->connection->prepare($sql);
+  $stmt->execute($user);
+
+
+}
+
+function update_doctor ($id, $user){
+  $insert= "";
+  $sql = "UPDATE doctors SET Name=:Name, Surname=:Surname,InstitutionName=:InstitutionName, PhoneNumber=:PhoneNumber, Address=:Address, JMBG=:JMBG, InstitutionPosition=:InstitutionPosition, PatientEnrollmentDate=:PatientEnrollmentDate, Account_ID=:Account_ID WHERE DoctorID=:DoctorID ";
+  $stmt= $this->connection->prepare($sql);
+  $user['DoctorID']=$id;
+  $stmt->execute($user);
+
+
+}
 }
 
  ?>
