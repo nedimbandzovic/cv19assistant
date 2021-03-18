@@ -4,11 +4,10 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
 class AccountDao extends BaseDao{
 
 
-  function add_account ($account){
+  function add_account ($user){
 
-    $sql="INSERT INTO accounts (Nickname,Password,AccountType) VALUES (:Nickname,:Password,:AccountType)";
-    $stmp=$this->connection->prepare($sql);
-    $stmp->execute($account);
+  return $this->insert("accounts",$user);
+
     }
   function get_account_by_ID($name){
 
@@ -24,21 +23,25 @@ class AccountDao extends BaseDao{
 function update_account ($id, $user){
 
   $query="UPDATE accounts SET";
-  foreach ($user as $nickname=>$value){
-    $query.=$nickname."=:".$nickname.",";
+    foreach ($user as $nickname=>$value){
+      $query.=$nickname."=:".$nickname.",";
 
-  }
-  $query=substr($query,0,-2);
-  $query.="WHERE Account_ID=:Account_ID";
+    }
+    $query=substr($query,0,-2);
+    $query.="WHERE id=:id";
 
-  $sql="UPDATE accounts SET Nickname=:Nickname,Password=:Password,AccountType=:AccountType WHERE Account_ID=:Account_ID";
-  $stmp=$this->connection->prepare($sql);
-  $user['Account_ID'] = $id;
-  $stmp->execute($user);
+    $sql="UPDATE accounts SET Nickname=:Nickname,Password=:Password,AccountType=:AccountType WHERE id=:id";
+    $stmp=$this->connection->prepare($sql);
+    $user['id'] = $id;
+    $stmp->execute($user);
+}
+
 }
 
 
-}
+
+
+
 
 
 ?>

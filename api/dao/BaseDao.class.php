@@ -19,7 +19,25 @@ class BaseDao{
 
   }
 
-  function insert(){
+  function insert($table, $entity){
+
+    $query="INSERT INTO ${table} (";
+      foreach($entity as $column=>$value){
+      $query.=$column.",";
+      }
+    $query=substr($query,0,-1);
+    $query.=")VALUES(";
+      foreach($entity as $column=>$value){
+      $query.=":".$column.",";
+      }
+    $query=substr($query,0,-1);
+    $query.=")";
+
+    $stmt=$this->connection->prepare($query);
+    $stmt->execute($entity);
+    $entity['id']=$this-> connection -> lastInsertId();
+    return $entity;
+
 
   }
 
@@ -40,11 +58,7 @@ class BaseDao{
 
   }
 
-  function update(){
 
-
-
-  }
 
 }
 

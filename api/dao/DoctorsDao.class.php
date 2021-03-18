@@ -28,6 +28,9 @@ function add_doctor($user){
 
 function update_doctor ($id, $user){
   $insert= "";
+
+  
+
   $sql = "UPDATE doctors SET Name=:Name, Surname=:Surname,InstitutionName=:InstitutionName, PhoneNumber=:PhoneNumber, Address=:Address, JMBG=:JMBG, InstitutionPosition=:InstitutionPosition, PatientEnrollmentDate=:PatientEnrollmentDate, Account_ID=:Account_ID WHERE DoctorID=:DoctorID ";
   $stmt= $this->connection->prepare($sql);
   $user['DoctorID']=$id;

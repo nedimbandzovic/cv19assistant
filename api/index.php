@@ -14,8 +14,27 @@ $user=[
   "AccountType"=>"COVID-19 patient"
 ];
 
+$user1=[
+  "Nickname"=>"adi.besirevic",
+  "Password"=>"adada",
+  "AccountType"=>"COVID-19 patient"
+];
+
+$user21=[
+  "Nickname"=>"aaa.besirevic",
+  "Password"=>"adadaaa",
+  "AccountType"=>"COVID-19 patient"
+];
+
+$account_dao->add_account($user21);
 
 
-$user=$account_dao->update_account(70,$user);
+
+
+
+
+
+
+
 
  ?>
