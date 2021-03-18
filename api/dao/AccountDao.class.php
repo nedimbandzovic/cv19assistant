@@ -6,7 +6,7 @@ class AccountDao extends BaseDao{
 
   function add_account ($user){
 
-  return $this->insert("accounts",$user);
+    return $this->insert("accounts",$user);
 
     }
   function get_account_by_ID($name){
@@ -22,21 +22,16 @@ class AccountDao extends BaseDao{
 
 function update_account ($id, $user){
 
-  $query="UPDATE accounts SET";
-    foreach ($user as $nickname=>$value){
-      $query.=$nickname."=:".$nickname.",";
+  $this->update("accounts",$id,$user);
+}
+function update_account_by_nickname($Nickname,$user){
 
-    }
-    $query=substr($query,0,-2);
-    $query.="WHERE id=:id";
-
-    $sql="UPDATE accounts SET Nickname=:Nickname,Password=:Password,AccountType=:AccountType WHERE id=:id";
-    $stmp=$this->connection->prepare($sql);
-    $user['id'] = $id;
-    $stmp->execute($user);
+  return $this->update("accounts",$Nickname,$user,"Nickname");
 }
 
 }
+
+
 
 
 

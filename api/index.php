@@ -22,11 +22,12 @@ $user1=[
 
 $user21=[
   "Nickname"=>"aaa.besirevic",
-  "Password"=>"adadaaa",
+  "Password"=>"xxx",
   "AccountType"=>"COVID-19 patient"
 ];
 
-$account_dao->add_account($user21);
+
+//$user=$account_dao->update_account(50, $user21);
 
 
 
