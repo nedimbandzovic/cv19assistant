@@ -23,6 +23,14 @@ class AccountDao extends BaseDao{
 
 function update_account ($id, $user){
 
+  $query="UPDATE accounts SET";
+  foreach ($user as $nickname=>$value){
+    $query.=$nickname."=:".$nickname.",";
+
+  }
+  $query=substr($query,0,-2);
+  $query.="WHERE Account_ID=:Account_ID";
+
   $sql="UPDATE accounts SET Nickname=:Nickname,Password=:Password,AccountType=:AccountType WHERE Account_ID=:Account_ID";
   $stmp=$this->connection->prepare($sql);
   $user['Account_ID'] = $id;
