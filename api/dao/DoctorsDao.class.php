@@ -10,15 +10,6 @@ class DoctorsDao extends BaseDao{
     parent::__construct("doctors");
   }
 
-function get_doctor_by_name($name){
-
-  return $this->query_unique("SELECT * FROM doctors WHERE Name=:Name", ["Name"=>$name]);
-
-}
-
-function get_doctors_by_institution($institution){
-  return $this->query_unique("SELECT * FROM doctors WHERE InstitutionName=:InstitutionName", ["InstitutionName"=>$institution]);
-}
 
 
 }

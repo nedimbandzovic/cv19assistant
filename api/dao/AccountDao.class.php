@@ -9,9 +9,7 @@ class AccountDao extends BaseDao{
 
 
 
-public function get_all_accounts(){
-    return $this->query("SELECT * FROM accounts", []);
-  }
+
 }
 
 
