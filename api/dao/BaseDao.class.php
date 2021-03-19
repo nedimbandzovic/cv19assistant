@@ -1,5 +1,12 @@
 <?php
 require_once dirname(__FILE__)."/../config.php";
+
+/**
+*BaseDao is the most important class for connection to the database;
+*In case you develop new Daos, you should connect it to this BaseDao class.
+
+
+*/
 class BaseDao{
 
 
