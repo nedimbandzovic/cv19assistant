@@ -38,7 +38,7 @@ $userx= [
   "AccountType"=>"COVID-19 patient"
 ];
 
-$dao->add($userx);
+
 
 
 $user=$dao->get_all_accounts();
