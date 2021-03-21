@@ -1,49 +1,55 @@
+
 <?php
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+
 require_once dirname(__FILE__)."\dao\AccountDao.class.php";
 require_once dirname(__FILE__)."\dao\BaseDao.class.php";
+require_once dirname(__FILE__)."\dao\DoctorsDao.class.php";
+require_once dirname (__FILE__)."\dao\HealthStatus.class.php";
+require_once dirname (__FILE__)."\dao\OrdersDao.class.php";
+require_once dirname (__FILE__)."\dao\PatientDao.class.php";
+require_once dirname (__FILE__)."\dao\PaymentsDao.class.php";
+require_once dirname (__FILE__)."\dao\PoliceOfficer.class.php";
+require_once dirname (__FILE__)."\dao\QuarantineStatusDao.class.php";
+require_once dirname (__FILE__)."\dao\SuperMarketChainDao.class.php";
+require dirname (__FILE__). '/../vendor/autoload.php';
+
+Flight::route('/', function(){
+    echo 'hello world!';
+});
+Flight::route('/accounts', function(){
+    $dao = new AccountDao();
+    $accounts=$dao->get_all(0,10);
+    Flight::json($accounts);
+});
+Flight::route('GET /accounts/@id', function($id){
+    $dao = new AccountDao();
+    $accounts=$dao->get_by_id($id);
+    Flight::json($accounts);
+});
+Flight::route('POST /accounts', function(){
+    print_r(Flight::request());
+});
+
+Flight::route('/hello3', function(){
+    echo 'hello world3!';
+});
+Flight::route('/hello4', function(){
+    echo 'hello world4!';
+});
+Flight::route('/hello5', function(){
+    echo 'hello world5!';
+});
+Flight::start();
 
 
 
 
-$account_dao= new AccountDao();
-
-$user=[
-  "Nickname"=>"mahmut.besirevic",
-  "Password"=>"makaaicsgo",
-  "AccountType"=>"COVID-19 patient"
-];
-
-$user1=[
-  "Nickname"=>"adi.besirevic",
-  "Password"=>"adada",
-  "AccountType"=>"COVID-19 patient"
-];
-
-$user21=[
-  "Nickname"=>"aaa.besirevic",
-  "Password"=>"xxx",
-  "AccountType"=>"COVID-19 patient"
-];
-
-$dao=new AccountDao();
-
-$userx= [
-
-  "Nickname" => "nedim.bandzovic",
-  "Password"=>"12345",
-  "AccountType"=>"COVID-19 patient"
-];
 
 
 
-
-$user=$dao->get_all_accounts();
-print_r($user);
-
-
-//$user=$account_dao->update_account(50, $user21);
 ?>

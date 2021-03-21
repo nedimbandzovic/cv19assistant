@@ -8,5 +8,7 @@
             "email": "nedim.bandzovic@stu.ibu.edu.ba"
         }
     ],
-    "require": {}
+    "require": {
+        "mikecao/flight": "^1.3"
+    }
 }
