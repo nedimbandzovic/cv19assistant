@@ -18,21 +18,46 @@ require_once dirname (__FILE__)."\dao\QuarantineStatusDao.class.php";
 require_once dirname (__FILE__)."\dao\SuperMarketChainDao.class.php";
 require dirname (__FILE__). '/../vendor/autoload.php';
 
+
+Flight::register('accountDao','AccountDao');
 Flight::route('/', function(){
     echo 'hello world!';
 });
-Flight::route('/accounts', function(){
-    $dao = new AccountDao();
-    $accounts=$dao->get_all(0,10);
+Flight::route('GET /accounts', function(){
+
+    $accounts=Flight::accountDao()->get_all(0,10);
     Flight::json($accounts);
 });
 Flight::route('GET /accounts/@id', function($id){
-    $dao = new AccountDao();
-    $accounts=$dao->get_by_id($id);
+
+    $accounts=Flight::accountDao()->get_by_id($id);
     Flight::json($accounts);
 });
+
 Flight::route('POST /accounts', function(){
-    print_r(Flight::request());
+    $requests=Flight::request();
+    $data=$requests->data->getData();
+    $account=Flight::accountDao()->add($data);
+    Flight::json($account);
+
+
+});
+
+Flight::route('PUT /accounts/@id', function($id){
+
+
+    $requests=Flight::request();
+    $data=$requests->data->getData();
+
+    Flight::accountDao()->update($id,$data);
+
+    $accounts=Flight::accountDao()->get_by_id($id);
+    Flight::json($accounts);
+
+
+
+
+
 });
 
 Flight::route('/hello3', function(){
