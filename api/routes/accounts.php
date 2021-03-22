@@ -2,14 +2,15 @@
 
 
 
-Flight::register('accountDao','AccountDao');
-Flight::route('/', function(){
-    echo 'hello world!';
-});
+
+
 Flight::route('GET /accounts', function(){
 
-    $accounts=Flight::accountDao()->get_all(0,10);
-    Flight::json($accounts);
+
+  $offset=Flight::query('offset',0);
+  $limit=Flight::query('limit',10);
+  Flight::json(Flight::accountDao()->get_all($offset,$limit));
+
 });
 Flight::route('GET /accounts/@id', function($id){
 
@@ -37,5 +38,6 @@ Flight::route('PUT /accounts/@id', function($id){
     $accounts=Flight::accountDao()->get_by_id($id);
     Flight::json($accounts);
 
+});
 
  ?>
