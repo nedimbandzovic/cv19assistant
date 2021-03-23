@@ -18,6 +18,8 @@ require_once dirname (__FILE__)."\dao\QuarantineStatusDao.class.php";
 require_once dirname (__FILE__)."\dao\SuperMarketChainDao.class.php";
 require dirname (__FILE__). '/../vendor/autoload.php';
 require_once dirname(__FILE__)."/routes/accounts.php";
+
+
 Flight::map('query', function($name, $default_value=NULL){
   $requests=Flight::request();
   $query_param=@$requests->query->getData()[$name];
