@@ -20,8 +20,8 @@ class AccountDao extends BaseDao{
 
     $order_column=substr($order,1);
     return $this-> query("SELECT * FROM accounts WHERE LOWER(Nickname) LIKE CONCAT('%',:Nickname,'%')
-    ORDER BY: column_name:order_direction
-    LIMIT ${limit} OFFSET ${offset} ", ["Nickname"=> strtolower($search), "column_name"=>$order_column,"order_direction"=>$order_direction]);
+    ORDER BY: ${order_column} ${order_direction}
+    LIMIT ${limit} OFFSET ${offset} ", ["Nickname"=> strtolower($search)]);
   }
 
 
