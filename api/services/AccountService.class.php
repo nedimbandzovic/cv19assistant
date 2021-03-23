@@ -28,4 +28,9 @@ class AccountService extends BaseService{
     if (!isset($account["Nickname"])) throw new Exception ("Nickname wasnt defined");
     return parent::add($account);
   }
+
+
+
+
+
 } ?>
