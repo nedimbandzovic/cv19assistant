@@ -5,6 +5,12 @@ class UserDao extends BaseDao{
 public function __construct(){
     parent::__construct("users");
 }
+
+
+public function get_user_by_token ($token){
+
+  return $this->query_unique("SELECT * FROM users WHERE token=:token", ["token"=>$token]);
+}
 }
 
  ?>

@@ -63,6 +63,17 @@ try {
 
 }
 
+public function confirm($token){
+    $user = $this->dao->get_user_by_token($token);
+
+    if (!isset($user['id'])) throw Exception("Invalid token");
+
+    $this->dao->update($user['id'], ["status" => "ACTIVE"]);
+    $this->accountDao->update($user['account_id'], ["Status" => "ACTIVE"]);
+
+    //TODO send email to customer
+  }
+
 }
 
 
