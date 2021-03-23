@@ -7,8 +7,21 @@ class AccountDao extends BaseDao{
     parent::__construct("accounts");
   }
 
-  public function get_accounts ($search, $offset, $limit){
-    return $this-> query("SELECT * FROM accounts WHERE LOWER(Nickname) LIKE CONCAT('%',:Nickname,'%') LIMIT ${limit} OFFSET ${offset} ", ["Nickname"=> strtolower($search)]);
+  public function get_accounts ($search, $offset, $limit,$order="-id"){
+
+    switch (substr($order,0,1)){
+
+      case "-": $order_direction="ASC"; break;
+
+      case "+": $order_direction="DESC"; break;
+
+      default: throw new Exception ("Invalid order format. First character should be either - or +"); break;
+    };
+
+    $order_column=substr($order,1);
+    return $this-> query("SELECT * FROM accounts WHERE LOWER(Nickname) LIKE CONCAT('%',:Nickname,'%')
+    ORDER BY: column_name:order_direction
+    LIMIT ${limit} OFFSET ${offset} ", ["Nickname"=> strtolower($search), "column_name"=>$order_column,"order_direction"=>$order_direction]);
   }
 
 
