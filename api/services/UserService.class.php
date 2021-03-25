@@ -60,7 +60,14 @@ try {
 
 } catch (\Exception $e){
   $this->dao->rollBack();
-  throw $e;
+  if (str_contains($e->getMessage(),'accounts.uniquename')){
+    throw new Exception ("Account with same mail exists in database", 400, $e);
+  }
+  else{
+    throw $e;
+  }
+
+
 }
 
 }

@@ -17,6 +17,14 @@ require_once dirname(__FILE__)."/services/AccountService.class.php";
 require_once dirname(__FILE__)."/services/UserService.class.php";
 
 
+Flight::map('error', function(Exception $ex){
+    // Handle error
+    header("Content-Type: application/json");
+    Flight::halt($ex->getCode(),json_encode(["message"=>$ex->getMessage()]));
+
+});
+
+
 Flight::map('query', function($name, $default_value=NULL){
   $requests=Flight::request();
   $query_param=@$requests->query->getData()[$name];
