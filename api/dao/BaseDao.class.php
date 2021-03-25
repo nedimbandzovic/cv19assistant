@@ -20,6 +20,7 @@ class BaseDao{
 
       $this->connection= new PDO("mysql:host=".Config::DB_HOST.";dbname=".Config::DB_SCHEME,Config::DB_USERNAME,Config::DB_PASSWORD);
       $this->connection-> setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $this->connection-> setAttribute(PDO::ATTR_AUTOCOMMIT,0);
 
     } catch (PDOException $e){
       throw $e;
@@ -115,6 +116,25 @@ public function get_by_id($id){
     $order_column = trim($this->connection->quote(substr($order, 1)),"'");
 
     return [$order_column, $order_direction];
+  }
+
+
+  public function beginTransaction(){
+
+    $this->connection->beginTransaction();
+
+  }
+  public function commit(){
+
+    $this->connection->commit();
+
+
+  }
+  public function rollBack(){
+
+    $this->connection->rollBack();
+
+
   }
 }
 

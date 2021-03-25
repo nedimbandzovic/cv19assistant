@@ -29,6 +29,7 @@ class UserService extends BaseService{
 
     if(!isset($user['account'])) throw new Exception("Account field is needed");
 try {
+  $this->dao->beginTransaction();
     $account=$this->accountDao->add([
 
       "Nickname"=>$user['account'],
@@ -50,7 +51,7 @@ try {
 
 
 
-    return $user;
+    $this->dao->commit();
 
 
 
@@ -58,6 +59,7 @@ try {
 
 
 } catch (\Exception $e){
+  $this->dao->rollBack();
   throw $e;
 }
 
