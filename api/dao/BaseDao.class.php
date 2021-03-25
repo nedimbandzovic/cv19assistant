@@ -96,26 +96,31 @@ public function get_by_id($id){
     return $this->query_unique("SELECT * FROM ".$this->table." WHERE id = :id", ["id" => $id]);
   }
 
-public function get_all($offset=0 , $limit=25, $order="-id"){
-  switch (substr($order,0,1)){
+  public function get_all($offset = 0, $limit = 25, $order="-id"){
+      list($order_column, $order_direction) = self::parse_order($order);
 
-    case "-": $order_direction="ASC"; break;
+      return $this->query("SELECT *
+                           FROM ".$this->table."
+                           ORDER BY ${order_column} ${order_direction}
+                           LIMIT ${limit} OFFSET ${offset}", []);
+    }
 
-    case "+": $order_direction="DESC"; break;
+    public function parse_order($order){
+    switch(substr($order, 0, 1)){
+      case '-': $order_direction = "ASC"; break;
+      case '+': $order_direction = "DESC"; break;
+      default: throw new Exception("Invalid order format. First character should be either + or -"); break;
+    };
 
-    default: throw new Exception ("Invalid order format. First character should be either - or +"); break;
-  };
-  $order_column=substr($order,1);
+    $order_column = trim($this->connection->quote(substr($order, 1)),"'");
 
-  return $this->query("SELECT * FROM ".$this->table." ORDER BY ${order_column} ${order_direction}
-  LIMIT ${limit} OFFSET ${offset}",[]);
+    return [$order_column, $order_direction];
+  }
 }
 
 
 
 
-
-  }
 
 
 
