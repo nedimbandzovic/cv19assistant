@@ -5,6 +5,7 @@ require_once dirname(__FILE__)."/../dao/UserDao.class.php";
 require_once dirname(__FILE__).'/BaseService.class.php';
 
 
+
 class UserService extends BaseService{
 
   private $accountDao;
@@ -15,7 +16,9 @@ class UserService extends BaseService{
   }
 
   public function register ($user){
+
     $n=10;
+
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $randomString = '';
 
@@ -24,7 +27,6 @@ class UserService extends BaseService{
         $randomString .= $characters[$index];
     }
     $pass=$randomString;
-
 
 
     if(!isset($user['account'])) throw new Exception("Account field is needed");

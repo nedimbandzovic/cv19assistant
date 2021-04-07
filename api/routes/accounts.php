@@ -3,7 +3,7 @@
 
 /* Swagger documentation */
 /**
- * @OA\Info(title="Autoresponder BizNet API", version="0.1")
+ * @OA\Info(title="Coronavirus Assistant API", version="0.1")
  * @OA\OpenApi(
  *    @OA\Server(url="http://localhost/cv19assistant/api/", description="Development Environment" ),
  * ),
@@ -29,28 +29,15 @@ Flight::route('GET /accounts', function(){
 });
 
 /**
- * @OA\Get(path="/admin/accounts/{id}",
- *     @OA\Parameter(type="integer", in="path", name="id", example=1, description="Id of account"),
+ * @OA\Get(path="/accounts/{id}", tags={ "account"},
+ *     @OA\Parameter(type="integer", in="path", name="id", default=1, description="Id of account"),
  *     @OA\Response(response="200", description="Fetch individual account")
  * )
  */
-
 Flight::route('GET /accounts/@id', function($id){
-
-    Flight::json(Flight::accountService()->get_by_id($id));
+  Flight::json(Flight::accountService()->get_by_id($id));
 });
-/**
- * @OA\Post(path="/admin/accounts",
- *     @OA\Parameter(type="integer", in="path", name="id", example=1, description="Id of account"),
- *     @OA\Response(response="200", description="Add new account")
- * )
- */
-Flight::route('POST /accounts', function(){
-    $data=Flight::request()->data->getData();
-    Flight::json(Flight::accountService()->add($data));
 
-
-});
 /**
  * @OA\Put(path="/admin/accounts",
  *     @OA\Parameter(type="integer", in="path", name="id", example=1, description="Id of account"),
