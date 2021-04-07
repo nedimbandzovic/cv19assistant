@@ -16,6 +16,12 @@ require_once dirname(__FILE__)."/routes/users.php";
 require_once dirname(__FILE__)."/services/AccountService.class.php";
 require_once dirname(__FILE__)."/services/UserService.class.php";
 
+Flight::route('GET /swagger', function(){
+  $openapi = @\OpenApi\scan(dirname(__FILE__)."/routes");
+  header('Content-Type: application/json');
+  echo $openapi->toJson();
+});
+
 
 Flight::map('error', function(Exception $ex){
     // Handle error
@@ -23,6 +29,8 @@ Flight::map('error', function(Exception $ex){
     Flight::halt($ex->getCode(),json_encode(["message"=>$ex->getMessage()]));
 
 });
+
+
 
 
 Flight::map('query', function($name, $default_value=NULL){

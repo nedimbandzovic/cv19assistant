@@ -1,9 +1,8 @@
-<!-- HTML for static distribution bundle build -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Coronavirus Assistant API</title>
+    <title>Autoresponder API</title>
     <link rel="stylesheet" type="text/css" href="swagger-ui.css">
     <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
     <style>
@@ -33,7 +32,7 @@
     <script>
         window.onload = function () {
             const ui = SwaggerUIBundle({
-                url: "http://localhost/cv19assistant/api/test.php",
+                url: "//<?=$_SERVER['SERVER_NAME']?><?=str_replace("/docs/", "/swagger", $_SERVER['REQUEST_URI'])?>",
                 dom_id: '#swagger-ui',
                 deepLinking: true,
                 presets: [

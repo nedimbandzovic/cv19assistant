@@ -1,36 +1,32 @@
 <?php
 
 
+/* Swagger documentation */
 /**
- * @OA\Info(title="Coronavirus Assistant API ", version="0.1")
+ * @OA\Info(title="Autoresponder BizNet API", version="0.1")
  * @OA\OpenApi(
  *    @OA\Server(url="http://localhost/cv19assistant/api/", description="Development Environment" ),
- *
  * ),
-
  */
 
 /**
  * @OA\Get(
- *     path="/accounts/,
+ *     path="/accounts,
  *     @OA\Response(response="200", description="Get registered accounts from DB")
  * )
  */
 
-  Flight::route('GET /accounts', function(){
-    $offset = Flight::query('offset', 0);
-    $limit = Flight::query('limit', 25);
-    $search = Flight::query('search');
-    $order = Flight::query('order', "-id");
+ Flight::route('GET /admin/accounts', function(){
+   $offset = Flight::query('offset', 0);
+   $limit = Flight::query('limit', 25);
+   $search = Flight::query('search');
+   $order = Flight::query('order', "-id");
 
-    Flight::json(Flight::accountService()->get_accounts($search, $offset, $limit, $order));
-  });
-
-
-
+   Flight::json(Flight::accountService()->get_accounts($search, $offset, $limit, $order));
+ });
 /**
  * @OA\Get(path="/admin/accounts/{id}",
- *     @OA\Parameter(type="integer", in="path", name="id", default=1, description="Id of account"),
+ *     @OA\Parameter(type="integer", in="path", name="id", example=1, description="Id of account"),
  *     @OA\Response(response="200", description="Fetch individual account")
  * )
  */
@@ -41,7 +37,7 @@ Flight::route('GET /accounts/@id', function($id){
 });
 /**
  * @OA\Post(path="/admin/accounts",
- *     @OA\Parameter(type="integer", in="path", name="id", default=1, description="Id of account"),
+ *     @OA\Parameter(type="integer", in="path", name="id", example=1, description="Id of account"),
  *     @OA\Response(response="200", description="Add new account")
  * )
  */
@@ -53,7 +49,7 @@ Flight::route('POST /accounts', function(){
 });
 /**
  * @OA\Put(path="/admin/accounts",
- *     @OA\Parameter(type="integer", in="path", name="id", default=1, description="Id of account"),
+ *     @OA\Parameter(type="integer", in="path", name="id", example=1, description="Id of account"),
  *     @OA\Response(response="200", description="Update account via ID")
  * )
  */
