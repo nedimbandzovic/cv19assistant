@@ -1,4 +1,6 @@
 <?php
+header('Content-Type: application/json');
+
 require_once dirname(__FILE__)."/../dao/AccountDao.class.php";
 require_once dirname(__FILE__)."/../dao/UserDao.class.php";
 
@@ -93,6 +95,20 @@ public function confirm($token){
     //TODO send email to customer
   }
 
+  public function login($user){
+    $db_user = $this->dao->get_user_by_email($user['Email']);
+
+    if (!isset($db_user['id'])) throw new Exception("User doesn't exists", 400);
+
+    if ($db_user['status'] != 'ACTIVE') throw new Exception("Account not active", 400);
+
+    $account = $this->accountDao->get_by_id($db_user['account_id']);
+    if (!isset($account['id']) || $account['Status'] != 'ACTIVE') throw new Exception("Account not active", 400);
+
+    if ($db_user['password'] != $user['password']) throw new Exception("Invalid password", 400);
+
+    return $db_user;
+  }
 }
 
 
