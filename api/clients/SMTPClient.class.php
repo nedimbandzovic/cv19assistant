@@ -23,7 +23,7 @@ public function __construct() {
 }
 public function send_register_user_token($user) {
   $message = (new Swift_Message('Confirmation of your account'))
-    ->setFrom(['bandzosteam@gmail.com' => 'Coronavirus Assistant'])
+    ->setFrom(['' => 'Coronavirus Assistant'])
     ->setTo([$user['Email']])
     ->setBody('Confirm your account by clicking the URL:http://localhost/cv19assistant/api/users/confirm/'.$user["token"]);
 
