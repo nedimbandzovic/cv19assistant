@@ -48,6 +48,7 @@ try {
         "status"=>"PENDING",
         "role"=>"USER",
         "token"=>md5(random_bytes(16))
+
       ]);
 
 
