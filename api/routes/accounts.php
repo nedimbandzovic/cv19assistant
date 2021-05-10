@@ -38,25 +38,6 @@ Flight::route('GET /accounts/@id', function($id){
   Flight::json(Flight::accountService()->get_by_id($id));
 });
 
-/**
- * @OA\Put(path="/accounts/{id}", tags={"account"},
- *   @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1),
- *   @OA\RequestBody(description="Basic account info that is going to be updated", required=true,
- *       @OA\MediaType(mediaType="application/json",
- *    			@OA\Schema(
- *    				 @OA\Property(property="Nickname", required="true", type="string", example="john.doe",	description="Nickname of the account" ),
-*               @OA\Property(property="Name", required="true", type="string", example="My Test Account",	description="Name of the account" ),
- *    				 @OA\Property(property="Status", type="string", example="ACTIVE",	description="Account status" )
- *          )
- *       )
- *     ),
- *     @OA\Response(response="200", description="Update account based on id")
- * )
- */
-Flight::route('PUT /accounts/@id', function($id){
-  $data = Flight::request()->data->getData();
-  Flight::json(Flight::accountService()->update($id, $data));
-});
 
 
  ?>

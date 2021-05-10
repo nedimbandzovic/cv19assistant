@@ -5,6 +5,12 @@ const DB_USERNAME="coronavirusassistant";
 const DB_PASSWORD="coronavirusassistant";
 const DB_SCHEME="coronavirusassistant";
 
+const SMTP_HOST="smtp.gmail.com";
+const SMTP_PORT=587;
+const SMTP_USER="bandzosteam@gmail.com";
+const SMTP_PASSWORD="robertprosinecki2018";
+const SMTP_ENCRYPTION="tls";
+
 
 }
  ?>

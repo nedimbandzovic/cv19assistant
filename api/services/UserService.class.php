@@ -3,16 +3,18 @@ require_once dirname(__FILE__)."/../dao/AccountDao.class.php";
 require_once dirname(__FILE__)."/../dao/UserDao.class.php";
 
 require_once dirname(__FILE__).'/BaseService.class.php';
+require_once dirname(__FILE__).'/../clients/SMTPClient.class.php';
 
 
 
 class UserService extends BaseService{
 
   private $accountDao;
-
+  private $SMTPClient;
   public function __construct(){
     $this->dao=new UserDao();
     $this->accountDao=new AccountDao();
+    $this->SMTPClient=new SMTPClient();
   }
 
   public function register ($user){
@@ -37,6 +39,7 @@ try {
       "Nickname"=>$user['account'],
       "Name"=>$user['Name'],
       "Password"=>$pass,
+      "Email"=>$user['Email'],
       "Status"=>"PENDING"
       ]);
       $user=parent::add([
@@ -44,12 +47,16 @@ try {
         "account_id"=>$account["id"],
         "nickname"=>$account["Nickname"],
         "name"=>$account["Name"],
+        "Email"=>$account["Email"],
+
         "password"=>$account["Password"],
         "status"=>"PENDING",
         "role"=>"USER",
         "token"=>md5(random_bytes(16))
 
       ]);
+
+      $this->SMTPClient->send_register_user_token($user);
 
 
 
