@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: application/json');
+
 
 require_once dirname(__FILE__)."/BaseDao.class.php";
 class UserDao extends BaseDao{
