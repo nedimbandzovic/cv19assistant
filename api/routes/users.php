@@ -33,6 +33,15 @@
 
  });
 
+ /**
+  * @OA\Get(
+  *     path="/users/confirm",tags={"Users"},
+  *        @OA\Parameter(type="string", in="query", name="token", default=123, description="Token for account activation"),
+  *
+  *     @OA\Response(response="200", description="Message upon successful activation")
+  * )
+  */
+
 Flight::route('GET /users/confirm/@token', function($token){
   Flight::userService()->confirm($token);
   Flight::json(["message" => "Your account has been activated"]);
