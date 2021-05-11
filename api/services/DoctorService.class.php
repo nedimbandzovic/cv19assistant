@@ -1,16 +1,14 @@
 <?php
-require_once dirname(__FILE__)."/../dao/AccountDao.class.php";
-require_once dirname(__FILE__)."/../dao/UserDao.class.php";
+require_once dirname(__FILE__)."/../dao/DoctorsDao.class.php";
 require_once dirname(__FILE__).'/BaseService.class.php';
 
 
-class AccountService extends BaseService{
+class DoctorService extends BaseService{
 
 
 
   public function __construct(){
-    $this-> dao=new AccountDao();
-    $this-> dao2=new UserDao();
+    $this-> dao=new DoctorDao();
   }
 
 
@@ -29,10 +27,3 @@ class AccountService extends BaseService{
     if (!isset($account["Nickname"])) throw new Exception ("Nickname wasnt defined");
     return parent::add($account);
   }
-
-
-
-
-
-
-} ?>

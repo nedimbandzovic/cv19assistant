@@ -25,7 +25,7 @@ public function send_register_user_token($user) {
   $message = (new Swift_Message('Confirmation of your account'))
     ->setFrom(['bandzosteam@gmail.com' => 'Coronavirus Assistant'])
     ->setTo([$user['Email']])
-    ->setBody('Confirm your account by clicking the URL:http://localhost/cv19assistant/api/users/confirm/'.$user["token"]);
+    ->setBody('Confirm your account by clicking the URL:http://localhost/cv19assistant/api/confirm/'.$user["token"]);
 
 
   $this->mailer->send($message);
@@ -36,9 +36,13 @@ public function send_user_recovery_token($user) {
     ->setTo([$user['Email']])
     ->setBody('Recover your account with the token:'.$user["token"]);
 
+    
+
 
   $this->mailer->send($message);
 }
+
+
 
 }
 

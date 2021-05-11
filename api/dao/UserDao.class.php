@@ -16,6 +16,13 @@ public function get_user_by_token ($token){
 public function get_user_by_email($email){
    return $this->query_unique("SELECT * FROM users WHERE Email = :Email", ["Email" => $email]);
  }
+ public function get_user_by_account_id($id){
+    return $this->query_unique("SELECT * FROM users WHERE account_id = :account_id", ["account_id" =>$id]);
+  }
+
+
+
+
 }
 
  ?>

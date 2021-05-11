@@ -58,6 +58,8 @@ try {
 
 
 
+
+
     $this->dao->commit();
 
 
@@ -134,8 +136,12 @@ public function confirm($token){
 
 
       $this->dao->update($db_user['id'], ['password' => $user['password'], 'token' => NULL]);
+      $this->accountDao->update($db_user['account_id'], ['Password'=>$user['password']]);
       return $db_user;
     }
+
+  
+
 }
 
 
