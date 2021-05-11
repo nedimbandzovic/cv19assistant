@@ -6,6 +6,8 @@ require_once dirname(__FILE__)."/../dao/AccountDao.class.php";
 require_once dirname(__FILE__)."/../dao/UserDao.class.php";
 
 require_once dirname(__FILE__).'/BaseService.class.php';
+require_once dirname(__FILE__).'/../Utils.class.php';
+
 require_once dirname(__FILE__).'/../clients/SMTPClient.class.php';
 
 
@@ -24,16 +26,6 @@ class UserService extends BaseService{
 
   public function register ($user){
 
-    $n=10;
-
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $randomString = '';
-
-    for ($i = 0; $i < $n; $i++) {
-        $index = rand(0, strlen($characters) - 1);
-        $randomString .= $characters[$index];
-    }
-    $pass=$randomString;
 
 
     if(!isset($user['account'])) throw new Exception("Account field is needed");
@@ -43,7 +35,7 @@ try {
 
       "Nickname"=>$user['account'],
       "Name"=>$user['Name'],
-      "Password"=>$pass,
+      "Password"=>Utils::random_pwd(),
       "Email"=>$user['Email'],
       "Status"=>"PENDING"
       ]);
