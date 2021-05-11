@@ -89,7 +89,7 @@ public function confirm($token){
 
     if (!isset($user['id'])) throw Exception("Invalid token");
 
-    $this->dao->update($user['id'], ["status" => "ACTIVE"]);
+    $this->dao->update($user['id'], ["status" => "ACTIVE", "token"=>NULL]);
     $this->accountDao->update($user['account_id'], ["Status" => "ACTIVE"]);
 
     //TODO send email to customer
@@ -128,8 +128,7 @@ public function confirm($token){
 
       if (!isset($db_user['id'])) throw new Exception("Invalid token", 400);
 
-      $this->dao->update($db_user['id'], ['password' => $user['password']]);
-
+      $this->dao->update($db_user['id'], ['password' => $user['password'], 'token' => NULL]);
       return $db_user;
     }
 }
