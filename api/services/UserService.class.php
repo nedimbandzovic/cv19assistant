@@ -1,11 +1,14 @@
 <?php
 header('Content-Type: application/json');
+use \Firebase\JWT\JWT;
 
 require_once dirname(__FILE__)."/../dao/AccountDao.class.php";
 require_once dirname(__FILE__)."/../dao/UserDao.class.php";
 
 require_once dirname(__FILE__).'/BaseService.class.php';
 require_once dirname(__FILE__).'/../clients/SMTPClient.class.php';
+
+
 
 
 
@@ -107,7 +110,10 @@ public function confirm($token){
 
     if ($db_user['password'] != $user['password']) throw new Exception("Invalid password", 400);
 
-    return $db_user;
+    $jwt=JWT::encode(["id"=>$db_user["id"],"account_id"=> $db_user["account_id"],"role"=>$db_user["role"]],"JWT_SECRET");
+
+
+    return ["token"=>$jwt];
   }
 
   public function forgot($user){
