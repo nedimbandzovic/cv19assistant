@@ -115,8 +115,12 @@ public function confirm($token){
     $db_user=$this->dao->get_user_by_email($user['Email']);
 
     if (!isset($db_user['id'])) throw new Exception ("User does not exist",400);
+    if (strtotime(date(Config::DATE_FORMAT)) - strtotime($db_user['token_creation']) < 360) throw new Exception ("Be patient, multiple tokens cannot be generated at once",400);
 
-    $db_user=$this->update($db_user['id'],['token'=>md5(random_bytes(16))]);
+
+
+
+    $db_user=$this->update($db_user['id'],['token'=>md5(random_bytes(16)),'token_creation'=>date(Config::DATE_FORMAT)]);
 
     $this->SMTPClient->send_user_recovery_token($db_user);
 
@@ -127,6 +131,9 @@ public function confirm($token){
       $db_user = $this->dao->get_user_by_token($user['token']);
 
       if (!isset($db_user['id'])) throw new Exception("Invalid token", 400);
+
+      if (strtotime(date(Config::DATE_FORMAT)) - strtotime($db_user['token_creation']) >60) throw new Exception ("Token expired",400);
+
 
       $this->dao->update($db_user['id'], ['password' => $user['password'], 'token' => NULL]);
       return $db_user;

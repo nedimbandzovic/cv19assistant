@@ -10,6 +10,7 @@ const SMTP_PORT=587;
 const SMTP_USER="";
 const SMTP_PASSWORD="";
 const SMTP_ENCRYPTION="tls";
+const DATE_FORMAT = "Y-m-d H:i:s";
 
 
 }
