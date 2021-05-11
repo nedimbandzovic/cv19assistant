@@ -15,12 +15,6 @@ require_once dirname(__FILE__)."\dao\UserDao.class.php";
 require dirname (__FILE__). '/../vendor/autoload.php';
 require_once dirname(__FILE__)."/routes/accounts.php";
 
-require_once dirname(__FILE__)."/routes/users.php";
-require_once dirname(__FILE__)."/routes/middleware.php";
-
-require_once dirname(__FILE__)."/services/AccountService.class.php";
-require_once dirname(__FILE__)."/services/UserService.class.php";
-
 Flight::route('GET /swagger', function(){
   $openapi = @\OpenApi\scan(dirname(__FILE__)."/routes");
   header('Content-Type: application/json');
@@ -52,6 +46,12 @@ Flight::map('query', function($name, $default_value=NULL){
 
 Flight::register('accountService', 'AccountService');
 Flight::register('userService', 'UserService');
+require_once dirname(__FILE__)."/routes/middleware.php";
+require_once dirname(__FILE__)."/routes/users.php";
+
+
+require_once dirname(__FILE__)."/services/AccountService.class.php";
+require_once dirname(__FILE__)."/services/UserService.class.php";
 
 
 
