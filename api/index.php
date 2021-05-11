@@ -14,7 +14,9 @@ require_once dirname(__FILE__)."\dao\UserDao.class.php";
 
 require dirname (__FILE__). '/../vendor/autoload.php';
 require_once dirname(__FILE__)."/routes/accounts.php";
+
 require_once dirname(__FILE__)."/routes/users.php";
+require_once dirname(__FILE__)."/routes/middleware.php";
 
 require_once dirname(__FILE__)."/services/AccountService.class.php";
 require_once dirname(__FILE__)."/services/UserService.class.php";

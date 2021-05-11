@@ -21,7 +21,7 @@
 
 /**
  * @OA\Get(
- *     path="/accounts",tags={"account"},
+ *     path="/accounts",tags={"account"},  security={{"ApiKeyAuth":{}}},
  *        @OA\Parameter(type="integer", in="query", name="offset", default=0, description="Offset for pagination"),
  *     @OA\Parameter(type="integer", in="query", name="limit", default=25, description="Limit for pagination"),
  *     @OA\Parameter(type="string", in="query", name="search", description="Search string for accounts. Case insensitive search."),
@@ -47,31 +47,14 @@ Flight::route('GET /accounts', function(){
  * )
  */
 Flight::route('GET /accounts/@id', function($id){
-  $header=getallheaders();
-  $token=@$header['Authorization'];
-
-  try {
-    $decoded = (array)\Firebase\JWT\JWT::decode($token,"JWT_SECRET",["HS256"]);
-    if ($decoded['account_id']==$id){
+if (Flight::get('user')['account_id']!=$id) throw new Exception ("This account is not for you", 401);
       Flight::json(Flight::accountService()->get_by_id($id));
 
-
-    }
-    else{
-      Flight::json(["message"=>"This account is not for you"],403);
-
-    }
-
-
-  } catch (\Exception $e){
-    Flight::json(["message"=>$e->getMessage()],401);
-    //print_r($e);die;
-  }
 
 
 });
 /**
- * @OA\Put(path="/accounts/{id}", tags={ "account"},
+ * @OA\Put(path="/accounts/{id}", tags={ "account"},  security={{"ApiKeyAuth":{}}},
  *   @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1),
  *   @OA\RequestBody(description="Basic account info that is going to be updated", required=true,
  *       @OA\MediaType(mediaType="application/json",
