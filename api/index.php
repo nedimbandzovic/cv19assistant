@@ -1,5 +1,7 @@
 
 <?php
+use \Firebase\JWT\JWT;
+
 header('Content-Type: application/json');
 
 ini_set('display_errors', 1);

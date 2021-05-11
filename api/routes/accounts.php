@@ -1,12 +1,22 @@
 <?php
 
 
+
 /* Swagger documentation */
 /**
  * @OA\Info(title="Coronavirus Assistant API", version="0.1")
  * @OA\OpenApi(
  *    @OA\Server(url="http://localhost/cv19assistant/api/", description="Development Environment" ),
  * ),
+ * @OA\SecurityScheme(
+
+ * securityScheme="ApiKeyAuth",
+ * in="header",
+ *name="Authorization",
+ *type="apiKey",
+ *scheme="Bearer",
+ *bearerFormat="JWT",
+ *),
  */
 
 /**
@@ -29,13 +39,28 @@ Flight::route('GET /accounts', function(){
 });
 
 /**
- * @OA\Get(path="/accounts/{id}", tags={ "account"},
+ * @OA\Get(path="/accounts/{id}", tags={ "account"}, security={{"ApiKeyAuth":{}}},
+
+
  *     @OA\Parameter(type="integer", in="path", name="id", default=1, description="Id of account"),
  *     @OA\Response(response="200", description="Fetch individual account")
  * )
  */
 Flight::route('GET /accounts/@id', function($id){
-  Flight::json(Flight::accountService()->get_by_id($id));
+  $header=getallheaders();
+  $token=@$header['Authorization'];
+
+  try {
+    $decoded = (array)\Firebase\JWT\JWT::decode($token,"JWT_SECRET",["HS256"]);
+    Flight::json(Flight::accountService()->get_by_id($id));
+
+
+  } catch (\Exception $e){
+    Flight::json(["message"=>$e->getMessage()],401);
+    //print_r($e);die;
+  }
+
+
 });
 /**
  * @OA\Put(path="/accounts/{id}", tags={ "account"},
