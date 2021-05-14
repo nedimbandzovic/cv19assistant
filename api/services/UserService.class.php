@@ -62,6 +62,7 @@ try {
         "MedicalInsuranceNO"=>$user['MedicalInsuranceNO'],
         "Vaccine"=>Utils::getVaccine(),
         "VaccinationPlace"=>Utils::getVaccinationPlace(),
+        "VaccinationDate"=>Utils::getVaccinationDate()
       ]);
 
 
