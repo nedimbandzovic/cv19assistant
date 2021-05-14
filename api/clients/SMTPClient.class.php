@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__FILE__).'/../config.php';
 require_once dirname(__FILE__).'/../../vendor/autoload.php';
+require_once dirname(__FILE__).'/../dao/PatientDao.class.php';
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -36,11 +37,13 @@ public function send_user_recovery_token($user) {
     ->setTo([$user['Email']])
     ->setBody('Recover your account with the token:'.$user["token"]);
 
-    
+
 
 
   $this->mailer->send($message);
 }
+
+
 
 
 

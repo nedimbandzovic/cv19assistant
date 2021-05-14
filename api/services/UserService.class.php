@@ -65,6 +65,8 @@ try {
         "VaccinationDate"=>Utils::getVaccinationDate()
       ]);
 
+      $y=$user['PhoneNumber'];
+
 
 
 
@@ -89,6 +91,7 @@ try {
 
 
       $this->SMTPClient->send_register_user_token($user);
+    
 
 
 
@@ -122,6 +125,12 @@ public function confirm($token){
 
     $this->dao->update($user['id'], ["status" => "ACTIVE", "token"=>NULL]);
     $this->accountDao->update($user['account_id'], ["Status" => "ACTIVE"]);
+
+
+
+
+
+
 
     //TODO send email to customer
   }
@@ -173,6 +182,9 @@ public function confirm($token){
       $this->accountDao->update($db_user['account_id'], ['Password'=>$user['password']]);
       return $db_user;
     }
+
+
+
 
 
 

@@ -5,6 +5,8 @@ class PatientDao extends BaseDao{
 public function __construct(){
   parent::__construct("patients");
 }
+
+
 }
 
  ?>
