@@ -41,5 +41,19 @@ Flight::route('/doctors/*', function(){
     die;
   }
 });
+Flight::route('/patients/*', function(){
+  try {
+    $user = (array)\Firebase\JWT\JWT::decode(Flight::header("Authorization"), Config::JWT_SECRET, ["HS256"]);
+    if ($user['r'] != "PATIENT"){
+      throw new Exception("Patient access required", 403);
+    }
+    Flight::set('user', $user);
+    return TRUE;
+  } catch (\Exception $e) {
+    Flight::json(["message" => $e->getMessage()], 401);
+    die;
+  }
+});
+
 
  ?>
