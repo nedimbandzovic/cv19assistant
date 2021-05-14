@@ -54,7 +54,7 @@ Flight::register('userService', 'UserService');
 Flight::register('doctorService','DoctorService');
 Flight::register('healthstatusService','HealthStatusServices');
 
-Flight::register('patientService','PatientsServices');
+
 
 require_once dirname(__FILE__)."/routes/middleware.php";
 require_once dirname(__FILE__)."/routes/users.php";
@@ -62,7 +62,6 @@ require_once dirname(__FILE__)."/routes/users.php";
 
 require_once dirname(__FILE__)."/services/AccountService.class.php";
 require_once dirname(__FILE__)."/services/UserService.class.php";
-require_once dirname(__FILE__)."/services/PatientsServices.class.php";
 
 
 

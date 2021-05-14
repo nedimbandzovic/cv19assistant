@@ -9,6 +9,7 @@ require_once dirname(__FILE__).'/BaseService.class.php';
 require_once dirname(__FILE__).'/../Utils.class.php';
 
 require_once dirname(__FILE__).'/../clients/SMTPClient.class.php';
+require_once dirname(__FILE__).'/../dao/PatientDao.class.php';
 
 
 
@@ -22,6 +23,9 @@ class UserService extends BaseService{
     $this->dao=new UserDao();
     $this->accountDao=new AccountDao();
     $this->SMTPClient=new SMTPClient();
+    $this->patientsDao=new PatientDao();
+
+
   }
 
   public function register ($user){
@@ -38,7 +42,31 @@ try {
       "Password"=>Utils::random_pwd(),
       "Email"=>$user['Email'],
       "Status"=>"PENDING"
+
+
       ]);
+
+      $x=$account['id'];
+
+      $user=$this->patientsDao->add([
+
+
+        "Name"=>$user['Name'],
+        "accounts_id"=>$x,
+        "DateOfBirth"=>$user['DateOfBirth'],
+        "PhoneNumber"=>$user['PhoneNumber'],
+        "City"=>$user['City'],
+        "Address"=>$user['Address'],
+        "Country"=>$user['Country'],
+        "JMBG"=>$user['JMBG'],
+        "MedicalInsuranceNO"=>$user['MedicalInsuranceNO'],
+        "Vaccine"=>Utils::getVaccine(),
+        "VaccinationPlace"=>Utils::getVaccinationPlace(),
+      ]);
+
+
+
+
       $user=parent::add([
 
         "account_id"=>$account["id"],
@@ -48,19 +76,22 @@ try {
 
         "password"=>$account["Password"],
         "status"=>"PENDING",
-        "role"=>"USER",
+        "role"=>"PATIENT",
         "token"=>md5(random_bytes(16))
 
       ]);
+
+
+
+
+
+
 
       $this->SMTPClient->send_register_user_token($user);
 
 
 
-
-
-
-    $this->dao->commit();
+$this->dao->commit();
 
 
 
@@ -80,6 +111,8 @@ try {
 }
 
 }
+
+
 
 public function confirm($token){
     $user = $this->dao->get_user_by_token($token);
@@ -140,7 +173,7 @@ public function confirm($token){
       return $db_user;
     }
 
-  
+
 
 }
 
