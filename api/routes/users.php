@@ -17,9 +17,9 @@
   *    				 @OA\Property(property="account", required="true", type="string", example="My Test Account",	description="Name of the account" ),
   *    				 @OA\Property(property="Name", required="true", type="string", example="My Test Account",	description="Name of the account" ),
   *    				 @OA\Property(property="Email", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
-  *@OA\Property(property="Surname", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
  *    				 @OA\Property(property="DateOfBirth", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
  *    				 @OA\Property(property="PhoneNumber", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
+
  *    				 @OA\Property(property="City", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
  *    				 @OA\Property(property="Address", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
  *    				 @OA\Property(property="Country", required="true", type="string", example="Any kind of email",	description="Email of the account" ),

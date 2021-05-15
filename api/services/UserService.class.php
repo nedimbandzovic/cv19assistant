@@ -55,6 +55,7 @@ try {
         "accounts_id"=>$x,
         "DateOfBirth"=>$user['DateOfBirth'],
         "PhoneNumber"=>$user['PhoneNumber'],
+        "Email"=>$user['Email'],
         "City"=>$user['City'],
         "Address"=>$user['Address'],
         "Country"=>$user['Country'],
@@ -65,7 +66,7 @@ try {
         "VaccinationDate"=>Utils::getVaccinationDate()
       ]);
 
-      $y=$user['PhoneNumber'];
+
 
 
 
@@ -91,7 +92,7 @@ try {
 
 
       $this->SMTPClient->send_register_user_token($user);
-    
+
 
 
 

@@ -12,8 +12,11 @@ class SMTPClient{
 
 
 private $mailer;
+protected $dao;
 
 public function __construct() {
+
+  $dao= new PatientDao();
 
  $transport = (new Swift_SmtpTransport(Config::SMTP_HOST,Config::SMTP_PORT,Config::SMTP_ENCRYPTION))
    ->setUsername(Config::SMTP_USER)
@@ -43,11 +46,32 @@ public function send_user_recovery_token($user) {
   $this->mailer->send($message);
 }
 
+public function send_user_info($number){
 
+  $user = $this->dao->get_user_by_phonenumber($number);
+
+
+  /*$message = (new Swift_Message('Confirmation of your account'))
+    ->setFrom(['bandzosteam@gmail.com' => 'Coronavirus Assistant'])
+    ->setTo([$user['Email']])
+    ->setBody('Test');
+
+
+
+
+  $this->mailer->send($message);
+  */
+}
 
 
 
 }
+
+
+
+
+
+
 
 
 
