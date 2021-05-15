@@ -117,3 +117,33 @@ Flight::route('POST /reset', function(){
 
 
 });
+
+/**
+  * @OA\Post(path="/registerDoctor", tags={ "Users"},
+  *   @OA\RequestBody(description="Basic account info", required=true,
+  *       @OA\MediaType(mediaType="application/json",
+  *    			@OA\Schema(
+  *    				 @OA\Property(property="account", required="true", type="string", example="My Test Account",	description="Name of the account" ),
+  *    				 @OA\Property(property="Name", required="true", type="string", example="My Test Account",	description="Name of the account" ),
+  *    				 @OA\Property(property="Email", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
+ *    				 @OA\Property(property="InstitutionName", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
+
+ *    				 @OA\Property(property="PhoneNumber", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
+ *    				 @OA\Property(property="Address", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
+ *    				 @OA\Property(property="JMBG", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
+ *    				 @OA\Property(property="InstitutionPosition", required="true", type="int", example="Any kind of email",	description="Email of the account" ),
+
+  *          )
+  *       )
+  *     ),
+  *  @OA\Response(response="200", description="Account that has been added into database with ID assigned.")
+  * )
+  */
+ Flight::route('POST /registerDoctor ', function(){
+     $data=Flight::request()->data->getData();
+     Flight::json(Flight::userService()->registerDoctor($data));
+
+     Flight::json(["message"=>"Check your email for confirmation link"]);
+
+
+ });

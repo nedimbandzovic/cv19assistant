@@ -36,8 +36,9 @@ Flight::route('GET /doctors/accounts', function(){
   $search = Flight::query('search');
   $order = Flight::query('order', "-id");
 
-  Flight::json(Flight::DoctorService()->get_accounts($search, $offset, $limit, $order));
+  Flight::json(Flight::doctorService()->get_accounts($search, $offset, $limit, $order));
 });
+
 
 
 

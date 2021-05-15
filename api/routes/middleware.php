@@ -34,7 +34,7 @@ Flight::route('/patients/*', function(){
 });
 
 
-Flight::route('/doctor/*', function(){
+Flight::route('/doctors/*', function(){
   try {
     $user = (array)\Firebase\JWT\JWT::decode(Flight::header("Authorization"), Config::JWP_SECRET, ["HS256"]);
     if ($user['role'] != "DOCTOR"){

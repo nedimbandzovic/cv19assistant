@@ -10,6 +10,8 @@ require_once dirname(__FILE__).'/../Utils.class.php';
 
 require_once dirname(__FILE__).'/../clients/SMTPClient.class.php';
 require_once dirname(__FILE__).'/../dao/PatientDao.class.php';
+require_once dirname(__FILE__).'/../dao/DoctorsDao.class.php';
+
 
 
 
@@ -24,6 +26,7 @@ class UserService extends BaseService{
     $this->accountDao=new AccountDao();
     $this->SMTPClient=new SMTPClient();
     $this->patientsDao=new PatientDao();
+    $this->doctorsDao=new DoctorsDao();
 
 
   }
@@ -183,6 +186,90 @@ public function confirm($token){
       $this->accountDao->update($db_user['account_id'], ['Password'=>$user['password']]);
       return $db_user;
     }
+
+    public function registerDoctor ($user){
+
+
+
+      if(!isset($user['account'])) throw new Exception("Account field is needed");
+  try {
+    $this->dao->beginTransaction();
+      $account=$this->accountDao->add([
+
+        "Nickname"=>$user['account'],
+        "Name"=>$user['Name'],
+        "Password"=>Utils::random_pwd(),
+        "Email"=>$user['Email'],
+        "Status"=>"PENDING"
+
+
+        ]);
+
+        $x=$account['id'];
+
+        $user=$this->doctorsDao->add([
+
+
+          "Name"=>$user['Name'],
+          "Account_ID"=>$x,
+          "InstitutionName"=>$user['InstitutionName'],
+          "PhoneNumber"=>$user['PhoneNumber'],
+          "Address"=>$user['Address'],
+          "JMBG"=>$user['JMBG'],
+          "InstitutionPosition"=>$user['InstitutionPosition']
+
+        ]);
+
+
+
+
+
+
+        $user=parent::add([
+
+          "account_id"=>$account["id"],
+          "nickname"=>$account["Nickname"],
+          "name"=>$account["Name"],
+          "Email"=>$account["Email"],
+
+          "password"=>$account["Password"],
+          "status"=>"PENDING",
+          "role"=>"DOCTOR",
+          "token"=>md5(random_bytes(16))
+
+        ]);
+
+
+
+
+
+
+
+        $this->SMTPClient->send_register_user_token($user);
+
+
+
+
+  $this->dao->commit();
+
+
+
+
+
+
+  } catch (\Exception $e){
+    $this->dao->rollBack();
+    if (str_contains($e->getMessage(),'accounts.uniquename')){
+      throw new Exception ("Account with same mail exists in database", 400, $e);
+    }
+    else{
+      throw $e;
+    }
+
+
+  }
+
+  }
 
 
 
