@@ -11,6 +11,7 @@ const SMTP_USER="";
 const SMTP_PASSWORD="";
 const SMTP_ENCRYPTION="tls";
 const DATE_FORMAT = "Y-m-d H:i:s";
+const JWT_TOKEN_TIME=604800;
 
 
 }

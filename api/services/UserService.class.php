@@ -148,7 +148,7 @@ public function confirm($token){
 
     if ($db_user['password'] != $user['password']) throw new Exception("Invalid password", 400);
 
-    $jwt=JWT::encode(["id"=>$db_user["id"],"account_id"=> $db_user["account_id"],"role"=>$db_user["role"]],"JWT_SECRET");
+    $jwt=JWT::encode(["exp"=>(time()+Config::JWT_TOKEN_TIME),"id"=>$db_user["id"],"account_id"=> $db_user["account_id"],"role"=>$db_user["role"]],"JWT_SECRET");
 
 
     return ["token"=>$jwt];
