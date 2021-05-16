@@ -51,6 +51,7 @@ try {
 
       $x=$account['id'];
 
+
       $user=$this->patientsDao->add([
 
 
@@ -173,6 +174,7 @@ public function confirm($token){
 
 
   }
+
 
 
 

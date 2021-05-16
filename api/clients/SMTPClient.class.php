@@ -46,21 +46,21 @@ public function send_user_recovery_token($user) {
   $this->mailer->send($message);
 }
 
-public function send_user_info($number){
-
-  $user = $this->dao->get_user_by_phonenumber($number);
-
-
-  /*$message = (new Swift_Message('Confirmation of your account'))
+public function send_user_recovery_token2($user) {
+  $message = (new Swift_Message('Confirmation of your account'))
     ->setFrom(['bandzosteam@gmail.com' => 'Coronavirus Assistant'])
     ->setTo([$user['Email']])
-    ->setBody('Test');
+    ->setBody('Vaccine changed succesfully');
 
 
 
 
   $this->mailer->send($message);
-  */
+}
+
+public function send_user_info($number){
+
+
 }
 
 
