@@ -166,7 +166,7 @@ Flight::route('POST /reset', function(){
    Flight::json(Flight::userService()->update($id, $data));
  });
  /**
-  * @OA\Put(path="/admin/patients/{id}", tags={ "Admin"}, security={{"ApiKeyAuth": {}}},
+  * @OA\Put(path="/doctors/vaccine/{id}", tags={ "Doctors"}, security={{"ApiKeyAuth": {}}},
   *   @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1),
   *   @OA\RequestBody(description="Update the vaccine", required=true,
   *       @OA\MediaType(mediaType="application/json",
@@ -178,7 +178,37 @@ Flight::route('POST /reset', function(){
   *     @OA\Response(response="200", description="Update account based on id")
   * )
   */
- Flight::route('PUT /admin/patients/@id', function($id){
+ Flight::route('PUT /doctors/vaccine/@id', function($id){
    $data = Flight::request()->data->getData();
    Flight::json(Flight::patientService()->update($id, $data));
+ });
+
+ /**
+  * @OA\Get(path="/doctors/{id}", tags={"Doctors"}, security={{"ApiKeyAuth": {}}},
+  *     @OA\Parameter(type="integer", in="path", name="id", default=1, description="Id of account"),
+  *     @OA\Response(response="200", description="Fetch individual account")
+  * )
+  */
+ Flight::route('GET /doctors/@id', function($id){
+   Flight::json(Flight::doctorService()->get_by_id($id));
+ });
+
+ /**
+  * @OA\Put(path="/doctors/{id}", tags={ "Doctors"}, security={{"ApiKeyAuth": {}}},
+  *   @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1),
+  *   @OA\RequestBody(description="Update the vaccine", required=true,
+  *       @OA\MediaType(mediaType="application/json",
+  *    			@OA\Schema(
+  *    				 @OA\Property(property="Name", required="true", type="string", example="Sputnik V",	description="Enter the new vaccine" ),
+  *    				 @OA\Property(property="InstitutionName", required="true", type="string", example="Sputnik V",	description="Enter the new vaccine" ),
+
+  *          )
+  *       )
+  *     ),
+  *     @OA\Response(response="200", description="Update account based on id")
+  * )
+  */
+ Flight::route('PUT /doctors/@id', function($id){
+   $data = Flight::request()->data->getData();
+   Flight::json(Flight::doctorService()->update($id, $data));
  });

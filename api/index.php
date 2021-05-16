@@ -68,6 +68,8 @@ require_once dirname(__FILE__)."/routes/users.php";
 require_once dirname(__FILE__)."/services/AccountService.class.php";
 require_once dirname(__FILE__)."/services/UserService.class.php";
 require_once dirname(__FILE__)."/services/PatientService.class.php";
+require_once dirname(__FILE__)."/services/DoctorService.class.php";
+
 
 
 

@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /* Swagger documentation */
 /**
  * @OA\Info(title="Coronavirus Assistant API", version="0.1")

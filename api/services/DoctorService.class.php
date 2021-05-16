@@ -8,7 +8,7 @@ class DoctorService extends BaseService{
 
 
   public function __construct(){
-    $this-> dao=new DoctorDao();
+    $this-> dao=new DoctorsDao();
   }
 
 
@@ -27,3 +27,5 @@ class DoctorService extends BaseService{
     if (!isset($account["Nickname"])) throw new Exception ("Nickname wasnt defined");
     return parent::add($account);
   }
+
+}
