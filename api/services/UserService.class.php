@@ -151,7 +151,7 @@ public function confirm($token){
 
     if ($db_user['password'] != $user['password']) throw new Exception("Invalid password", 400);
 
-    $jwt=JWT::encode(["exp"=>(time()+Config::JWT_TOKEN_TIME),"id"=>$db_user["id"],"account_id"=> $db_user["account_id"],"role"=>$db_user["role"]],"JWT_SECRET");
+    $jwt=JWT::encode(["exp"=>(time()+Config::JWT_TOKEN_TIME),"id"=>$db_user["id"],"account_id"=> $db_user["account_id"],"role"=>$db_user["role"]],Config::JWP_SECRET);
 
 
     return ["token"=>$jwt];
@@ -174,6 +174,10 @@ public function confirm($token){
 
   }
 
+
+
+
+
   public function reset($user){
       $db_user = $this->dao->get_user_by_token($user['token']);
 
@@ -188,7 +192,6 @@ public function confirm($token){
     }
 
     public function registerDoctor ($user){
-
 
 
       if(!isset($user['account'])) throw new Exception("Account field is needed");

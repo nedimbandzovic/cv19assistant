@@ -12,7 +12,6 @@ error_reporting(E_ALL);
 require_once dirname(__FILE__)."\dao\AccountDao.class.php";
 require_once dirname(__FILE__)."\dao\UserDao.class.php";
 require_once dirname(__FILE__)."\dao\DoctorsDao.class.php";
-require_once dirname(__FILE__)."\dao\HealthStatus.class.php";
 require_once dirname(__FILE__)."\dao\PatientDao.class.php";
 
 
@@ -37,6 +36,11 @@ Flight::map('error', function(Exception $ex){
 
 });
 */
+Flight::map('header', function($name){
+  $headers = getallheaders();
+  return @$headers[$name];
+});
+
 
 
 
@@ -52,7 +56,8 @@ Flight::map('query', function($name, $default_value=NULL){
 Flight::register('accountService', 'AccountService');
 Flight::register('userService', 'UserService');
 Flight::register('doctorService','DoctorService');
-Flight::register('healthstatusService','HealthStatusServices');
+Flight::register('patientService','PatientService');
+
 
 
 
@@ -62,6 +67,8 @@ require_once dirname(__FILE__)."/routes/users.php";
 
 require_once dirname(__FILE__)."/services/AccountService.class.php";
 require_once dirname(__FILE__)."/services/UserService.class.php";
+require_once dirname(__FILE__)."/services/PatientService.class.php";
+
 
 
 

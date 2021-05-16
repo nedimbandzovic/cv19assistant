@@ -38,7 +38,7 @@ Flight::route('/doctors/*', function(){
   try {
     $user = (array)\Firebase\JWT\JWT::decode(Flight::header("Authorization"), Config::JWP_SECRET, ["HS256"]);
     if ($user['role'] != "DOCTOR"){
-      throw new Exception("Patient access required", 403);
+      throw new Exception("Doctor access required", 403);
     }
     Flight::set('user', $user);
     return TRUE;

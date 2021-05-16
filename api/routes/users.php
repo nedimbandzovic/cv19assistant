@@ -147,3 +147,38 @@ Flight::route('POST /reset', function(){
 
 
  });
+
+ /**
+  * @OA\Put(path="/admin/users/{id}", tags={ "Admin"}, security={{"ApiKeyAuth": {}}},
+  *   @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1),
+  *   @OA\RequestBody(description="Basic account info that is going to be updated", required=true,
+  *       @OA\MediaType(mediaType="application/json",
+  *    			@OA\Schema(
+  *    				 @OA\Property(property="role", required="true", type="string", example="My Test Account",	description="Name of the account" ),
+  *          )
+  *       )
+  *     ),
+  *     @OA\Response(response="200", description="Update account based on id")
+  * )
+  */
+ Flight::route('PUT /admin/users/@id', function($id){
+   $data = Flight::request()->data->getData();
+   Flight::json(Flight::userService()->update($id, $data));
+ });
+ /**
+  * @OA\Put(path="/admin/patients/{id}", tags={ "Admin"}, security={{"ApiKeyAuth": {}}},
+  *   @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1),
+  *   @OA\RequestBody(description="Update the vaccine", required=true,
+  *       @OA\MediaType(mediaType="application/json",
+  *    			@OA\Schema(
+  *    				 @OA\Property(property="Vaccine", required="true", type="string", example="Sputnik V",	description="Enter the new vaccine" ),
+  *          )
+  *       )
+  *     ),
+  *     @OA\Response(response="200", description="Update account based on id")
+  * )
+  */
+ Flight::route('PUT /admin/patients/@id', function($id){
+   $data = Flight::request()->data->getData();
+   Flight::json(Flight::patientService()->update($id, $data));
+ });

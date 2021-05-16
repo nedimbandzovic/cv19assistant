@@ -39,20 +39,15 @@ Flight::route('GET /admin/accounts', function(){
 });
 
 /**
- * @OA\Get(path="/admin/accounts/{id}", tags={ "Admin"}, security={{"ApiKeyAuth":{}}},
-
-
+ * @OA\Get(path="/admin/accounts/{id}", tags={"Admin"}, security={{"ApiKeyAuth": {}}},
  *     @OA\Parameter(type="integer", in="path", name="id", default=1, description="Id of account"),
  *     @OA\Response(response="200", description="Fetch individual account")
  * )
  */
 Flight::route('GET /admin/accounts/@id', function($id){
-if (Flight::get('user')['account_id']!=$id) throw new Exception ("This account is not for you", 401);
-      Flight::json(Flight::accountService()->get_by_id($id));
-
-
-
+  Flight::json(Flight::accountService()->get_by_id($id));
 });
+
 /**
  * @OA\Put(path="/admin/accounts/{id}", tags={ "Admin"},  security={{"ApiKeyAuth":{}}},
  *   @OA\Parameter(@OA\Schema(type="integer"), in="path", name="id", default=1),
@@ -76,8 +71,5 @@ Flight::route('PUT /admin/accounts/@id', function($id){
   Flight::json(Flight::accountService()->update($id, $data));
 
 });
-
-
-
 
  ?>

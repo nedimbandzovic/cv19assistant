@@ -88,6 +88,7 @@ function add($entity){
 }
 
 function update($id, $entity){
+  
   return $this->execute_update($this->table,$id,$entity);
 
 
