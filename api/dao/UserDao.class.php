@@ -20,6 +20,16 @@ public function get_user_by_email($email){
     return $this->query_unique("SELECT * FROM users WHERE account_id = :account_id", ["account_id" =>$id]);
   }
 
+  public function get_accounts($search, $offset, $limit, $order){
+      list($order_column, $order_direction) = self::parse_order($order);
+
+      return $this->query("SELECT *
+                           FROM users
+                           WHERE LOWER(name) LIKE CONCAT('%', :name, '%')
+                           ORDER BY ${order_column} ${order_direction}
+                           LIMIT ${limit} OFFSET ${offset}",
+                           ["name" => strtolower($search)]);
+    }
 
 
 

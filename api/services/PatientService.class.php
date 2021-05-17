@@ -14,11 +14,11 @@ require_once dirname(__FILE__).'/../clients/SMTPClient.class.php';
 class PatientService extends BaseService{
 
   public function __construct(){
-    $this-> dao=new PatientDao();
+    $this->dao=new PatientDao();
   }
 
 
-  
+
 
 }
  ?>

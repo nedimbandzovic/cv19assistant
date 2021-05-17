@@ -16,7 +16,28 @@ public function get_user_by_phonenumber ($num){
 
       return $this->query_unique("SELECT * FROM patients WHERE accounts_id=:accounts_id", ["accounts_id"=>$id]);
     }
-}
+
+
+    public function get_accounts($search, $offset, $limit, $order){
+        list($order_column, $order_direction) = self::parse_order($order);
+
+        return $this->query("SELECT *
+                             FROM patients
+                             WHERE LOWER(name) LIKE CONCAT('%', :name, '%')
+                             ORDER BY ${order_column} ${order_direction}
+                             LIMIT ${limit} OFFSET ${offset}",
+                             ["name" => strtolower($search)]);
+      }
+
+
+
+
+
+
+
+
+    }
+
 
 
 
