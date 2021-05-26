@@ -41,9 +41,12 @@ class Utils{
 
   public static function getVaccinationDate(){
 
-    $int= mt_rand(1262055681,1262055681);
-    $string = date("Y-m-d H:i:s",$int);
-    return $string;
+    $start = strtotime("2021-06-01 00:00:00");
+  $end =  strtotime("2022-12-31 23:59:59");
+
+  $randomDate = date("Y-m-d H:i:s", rand($start, $end));
+
+  return $randomDate;
 
 
 

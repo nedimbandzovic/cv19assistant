@@ -187,7 +187,6 @@
                                 <div class="form-group">
 
                                   <select id="register-vaccine" class="form-select" aria-label="Default select example">
-                                    <option selected>Select the desired vaccine</option>
                                 <option selected="Sinopharm-BBIpV">Sinopharm-BBIpV</option>
                                 <option selected="Pfizer-BioNTech">Pfizer-BioNTech</option>
                                 <option selected="SinoVAC">SinoVAC</option>
@@ -311,7 +310,7 @@
                           "Country":$("#register-country").val(),
                           "JMBG":$("#register-jmbg").val(),
                           "MedicalInsuranceNO":$("#register-medicalinsuranceno").val(),
-                          "Vaccine": val
+                          "Vaccine": receiveVaccine()
 
 
 
@@ -381,10 +380,12 @@
           $("#forgot-form-container").addClass("hidden");
 
         }
+        function receiveVaccine(){
+          var vaccine = $("#register-vaccine").val();
+          return vaccine;
+        }
 
 
-
-var val=$('.form-select').val();
 
 function doChangePassword(){
             var change_info = {
