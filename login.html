@@ -28,7 +28,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body style="display:none;">
 
         <div class="container">
             <div class="row">
@@ -65,6 +65,19 @@
 
         <script type="text/javascript">
 
+        $(function(){
+
+          if(window.localStorage.getItem("token")){
+
+            window.location="index.html";
+          }else{
+            $('body').show();
+          }
+        });
+
+
+
+
         function doLogin(){
 
 
@@ -80,7 +93,10 @@
 
 
         $.post("http://localhost/cv19assistant/api/login",login_info).done(function( data ){
-          alert("Data loaded " + data);
+
+          window.localStorage.setItem("token",data.token)
+
+
           window.location="index.html";
         }).fail(function( error ){
           $("#login-link").prop('disabled',false);
