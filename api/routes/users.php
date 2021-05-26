@@ -25,6 +25,8 @@
  *    				 @OA\Property(property="Country", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
  *    				 @OA\Property(property="JMBG", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
  *    				 @OA\Property(property="MedicalInsuranceNO", required="true", type="int", example="Any kind of email",	description="Email of the account" ),
+ *    				 @OA\Property(property="Vaccine", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
+
 
   *          )
   *       )
