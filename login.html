@@ -110,7 +110,29 @@
                                 <div class="form-group">
                                     <input id="register-medicalinsuranceno" class="form-control" placeholder="Medical Insurance Number" name="MedicalInsuranceNO" type="text" value="">
                                 </div>
-                                
+
+                                <div class="form-group">
+                                  <div class="text-nowrap" style="width: 8rem;">
+                                    Please choose a vaccine from the list below.
+                                  </div>
+                                </div>
+                                <div class="form-group">
+
+
+                                <div class="form-group">
+
+                                  <select id="register-vaccine" class="form-select" aria-label="Default select example">
+                                    <option selected>Select the desired vaccine</option>
+                                <option selected="Sinopharm-BBIpV">Sinopharm-BBIpV</option>
+                                <option selected="Pfizer-BioNTech">Pfizer-BioNTech</option>
+                                <option selected="SinoVAC">SinoVAC</option>
+                                <option selected="AstraZeneca-CoviShield">AstraZeneca-CoviShield</option>
+                                <option selected="Johnson&Johnson">Johnson&Johnson</option>
+                                <option selected="Sputnik V">Sputnik V</option>
+                                  </select>
+
+                                </div>
+
                                 <div class="form-group">
 
                                 <!-- Change this to a button or input when using this as a form -->
@@ -175,6 +197,8 @@
                           "Country":$("#register-country").val(),
                           "JMBG":$("#register-jmbg").val(),
                           "MedicalInsuranceNO":$("#register-medicalinsuranceno").val(),
+                          "Vaccine": val
+
 
 
 
@@ -234,6 +258,13 @@
 
 
         }
+
+
+
+var val=$('.form-select').val();
+
+
+
 
         </script>
 
