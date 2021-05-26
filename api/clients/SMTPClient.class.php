@@ -38,7 +38,8 @@ public function send_user_recovery_token($user) {
   $message = (new Swift_Message('Confirmation of your account'))
     ->setFrom(['bandzosteam@gmail.com' => 'Coronavirus Assistant'])
     ->setTo([$user['Email']])
-    ->setBody('Recover your account with the token:'.$user["token"]);
+    ->setBody('Recover your account with the token: http://localhost/cv19assistant/login.html?token=
+'.$user["token"]);
 
 
 
