@@ -31,7 +31,9 @@
     <body style="display:none;">
 
         <div class="container">
-            <div class="row">
+
+
+            <div id="login-form-container" class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <div class="login-panel panel panel-default">
                         <div class="panel-heading">
@@ -46,9 +48,15 @@
                                     <div class="form-group">
                                         <input id="password" class="form-control" placeholder="Password" name="password" type="password" value="">
                                     </div>
+                                    <div class="form-group">
 
                                     <!-- Change this to a button or input when using this as a form -->
                                     <button id="login-link" onclick="doLogin();" class="btn btn-lg btn-success btn-block">Login</button>
+                                  </div>
+
+                                    <div class="form-group pull-right">
+                                      <a href="#" onclick="showRegisterForm()">Register here</a>
+                                    </div>
                                 </fieldset>
                             </form>
                         </div>
@@ -56,6 +64,71 @@
                 </div>
             </div>
         </div>
+
+        <div id="register-form-alert" class="row hidden" style="margin-top:50px;">
+
+        <div class="alert alert-success" role="alert">
+          This is a success alert—check it out!
+        </div>
+</div>
+        <div id="register-form-container" class="row hidden">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Register Form</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form">
+                            <fieldset>
+                              <div class="form-group">
+                                  <input id="register-account" class="form-control" placeholder="Account nickname" name="account" type="text" autofocus>
+                              </div>
+                              <div class="form-group">
+                                  <input id="register-name" class="form-control" placeholder="Name and surname" name="Name" type="text" autofocus>
+                              </div>
+                              <div class="form-group">
+                                  <input id="register-email" class="form-control" placeholder="Email" name="Email" type="text" autofocus>
+                              </div>
+                                <div class="form-group">
+                                    <input id="register-dateofbirth" class="form-control" placeholder="Date of birth" name="DateOfBirth" type="text" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input id="register-phonenumber" class="form-control" placeholder="Phone Number" name="PhoneNumber" type="text" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input id="register-city" class="form-control" placeholder="City" name="City" type="text" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input id="register-address" class="form-control" placeholder="Address" name="Address" type="text" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input id="register-country" class="form-control" placeholder="Country" name="Country" type="text" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input id="register-jmbg" class="form-control" placeholder="JMBG" name="JMBG" type="text" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input id="register-medicalinsuranceno" class="form-control" placeholder="Medical Insurance Number" name="MedicalInsuranceNO" type="text" value="">
+                                </div>
+                                <div class="form-group">
+
+                                <!-- Change this to a button or input when using this as a form -->
+                                <button id="register-link" onclick="doRegister();" class="btn btn-lg btn-success btn-block">Register</button>
+                              </div>
+                              <div class="form-group pull-right">
+                                <a href="#" onclick="showLoginForm()">Back to login</a>
+                              </div>
+
+
+
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
         <!-- jQuery -->
         <script src="./assets/js/jquery.min.js"></script>
@@ -75,6 +148,58 @@
           }
         });
 
+        function showRegisterForm(){
+            $("#login-form-container").addClass("hidden");
+            $("#register-form-container").removeClass("hidden");
+          }
+
+          function showLoginForm(){
+              $("#login-form-container").removeClass("hidden");
+              $("#register-form-container").addClass("hidden");
+            }
+
+
+            function doRegister(){
+
+
+
+                        var register_info={
+                          "account":$("#register-account").val(),
+                          "Name":$("#register-name").val(),
+                          "Email":$("#register-email").val(),
+                          "DateOfBirth":$("#register-dateofbirth").val(),
+                          "PhoneNumber":$("#register-phonenumber").val(),
+                          "City":$("#register-city").val(),
+                          "Address":$("#register-address").val(),
+                          "Country":$("#register-country").val(),
+                          "JMBG":$("#register-jmbg").val(),
+                          "MedicalInsuranceNO":$("#register-medicalinsuranceno").val(),
+
+
+
+
+                        };
+                        $("#register-link").prop('disabled',true);
+
+
+
+                      $.post("http://localhost/cv19assistant/api/register",register_info).done(function( data ){
+                        console.log(data);
+                        $("#register-form-container").addClass("hidden");
+
+                        $("#register-form-alert").removeClass("hidden")
+
+                        $("#register-form-alert .alert").html("Account successful registrated, please check your email");
+
+
+                      }).fail(function( error ){
+                        $("#login-link").prop('disabled',false);
+                        console.log(error);
+
+                        alert(error.responseJSON.message);
+                      });
+
+            }
 
 
 

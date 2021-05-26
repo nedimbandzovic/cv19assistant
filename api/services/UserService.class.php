@@ -39,7 +39,7 @@ class UserService extends BaseService{
           return $this->dao->get_all($offset, $limit, $order);
         }
       }
-  
+
   public function register ($user){
 
 
