@@ -32,6 +32,63 @@
 
         <div class="container">
 
+          <div id="change-password-form-container" class="row hidden">
+              <div class="col-md-4 col-md-offset-4">
+                  <div class="login-panel panel panel-default">
+                      <div class="panel-heading">
+                          <h3 class="panel-title">Change password</h3>
+                      </div>
+                      <div class="panel-body">
+                          <form role="form">
+                              <fieldset>
+                                <div class="form-group">
+                                    <input id="change-password" class="form-control" placeholder="Password" name="password" type="password" value="">
+                                </div>
+
+                                  <div class="form-group">
+
+                                  <!-- Change this to a button or input when using this as a form -->
+                                  <button id="forgot-link" onclick="doChangePassword();" class="btn btn-lg btn-success btn-block">Change Password</button>
+                                </div>
+
+
+                              </fieldset>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+          <div id="forgot-form-container" class="row hidden">
+              <div class="col-md-4 col-md-offset-4">
+                  <div class="login-panel panel panel-default">
+                      <div class="panel-heading">
+                          <h3 class="panel-title">Forgot password</h3>
+                      </div>
+                      <div class="panel-body">
+                          <form role="form">
+                              <fieldset>
+                                  <div class="form-group">
+                                    <input id="forgot-email" class="form-control" placeholder="Email" name="Email" type="text" autofocus>
+                                  </div>
+
+                                  <div class="form-group">
+
+                                  <!-- Change this to a button or input when using this as a form -->
+                                  <button id="forgot-link" onclick="doForgotPassword();" class="btn btn-lg btn-success btn-block">Send Recovery Link</button>
+                                </div>
+
+                                  <div class="form-group pull-right">
+                                    <a href="#" onclick="showLoginForm()">Back to login</a>
+                                  </div>
+                              </fieldset>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
 
             <div id="login-form-container" class="row">
                 <div class="col-md-4 col-md-offset-4">
@@ -53,10 +110,15 @@
                                     <!-- Change this to a button or input when using this as a form -->
                                     <button id="login-link" onclick="doLogin();" class="btn btn-lg btn-success btn-block">Login</button>
                                   </div>
+                                  <div class="form-group pull-left">
+                                    <a href="#" onclick="showForgotForm()">Forgot password</a>
+                                  </div>
 
                                     <div class="form-group pull-right">
                                       <a href="#" onclick="showRegisterForm()">Register here</a>
                                     </div>
+
+
                                 </fieldset>
                             </form>
                         </div>
@@ -65,7 +127,7 @@
             </div>
         </div>
 
-        <div id="register-form-alert" class="row hidden" style="margin-top:50px;">
+        <div id="form-alert" class="row hidden" style="margin-top:50px;">
 
         <div class="alert alert-success" role="alert">
           This is a success alert—check it out!
@@ -75,7 +137,7 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Register Form</h3>
+                        <h3 class="panel-title">Register Form for COVID-19 vaccination</h3>
                     </div>
                     <div class="panel-body">
                         <form role="form">
@@ -136,7 +198,7 @@
                                 <div class="form-group">
 
                                 <!-- Change this to a button or input when using this as a form -->
-                                <button id="register-link" onclick="doRegister();" class="btn btn-lg btn-success btn-block">Register</button>
+                                <button id="register-link" onclick="doRegister()" class="btn btn-lg btn-success btn-block">Register</button>
                               </div>
                               <div class="form-group pull-right">
                                 <a href="#" onclick="showLoginForm()">Back to login</a>
@@ -179,6 +241,46 @@
           function showLoginForm(){
               $("#login-form-container").removeClass("hidden");
               $("#register-form-container").addClass("hidden");
+              $("#forgot-form-container").addClass("hidden");
+
+            }
+
+
+            function showForgotForm(){
+              $("#login-form-container").addClass("hidden");
+              $("#forgot-form-container").removeClass("hidden");
+
+
+
+            }
+
+            function doForgotPassword(){
+
+              var forgot_info={
+
+                "Email":$("#forgot-email").val()
+              };
+              $("#forgot-link").prop('disabled',true);
+
+
+              $.post("http://localhost/cv19assistant/api/forgot",forgot_info).done(function( data ){
+                console.log(data);
+                $("#forgot-form-container").addClass("hidden");
+
+                $("#form-alert").removeClass("hidden")
+
+                $("#form-alert .alert").html(data.message);
+              }).fail(function( error ){
+                $("#forgot-link").prop('disabled',false);
+
+                $("#forgot-form-container").addClass("hidden");
+
+                $("#form-alert").removeClass("hidden")
+
+                $("#form-alert .alert").html(error.responseJSON.message);
+
+              });
+
             }
 
 
@@ -212,9 +314,9 @@
                         console.log(data);
                         $("#register-form-container").addClass("hidden");
 
-                        $("#register-form-alert").removeClass("hidden")
+                        $("#form-alert").removeClass("hidden")
 
-                        $("#register-form-alert .alert").html("Account successful registrated, please check your email");
+                        $("form-alert .alert").html("Account successful registrated, please check your email");
 
 
                       }).fail(function( error ){

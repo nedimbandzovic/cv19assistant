@@ -29,13 +29,13 @@ Flight::route('GET /', function(){
   Flight::redirect('/docs');
 });
 
-/*Flight::map('error', function(Exception $ex){
+Flight::map('error', function(Exception $ex){
     // Handle error
     header("Content-Type: application/json");
     Flight::halt($ex->getCode(),json_encode(["message"=>$ex->getMessage()],$ex->getCode()?$ex->getCode():500));
 
 });
-*/
+
 Flight::map('header', function($name){
   $headers = getallheaders();
   return @$headers[$name];
