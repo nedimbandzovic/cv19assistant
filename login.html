@@ -48,7 +48,7 @@
                                     </div>
 
                                     <!-- Change this to a button or input when using this as a form -->
-                                    <a  onclick="doLogin();" class="btn btn-lg btn-success btn-block">Login</a>
+                                    <button id="login-link" onclick="doLogin();" class="btn btn-lg btn-success btn-block">Login</button>
                                 </fieldset>
                             </form>
                         </div>
@@ -75,11 +75,16 @@
 
 
           };
+          $("#login-link").prop('disabled',true);
+
+
 
         $.post("http://localhost/cv19assistant/api/login",login_info).done(function( data ){
           alert("Data loaded " + data);
           window.location="index.html";
         }).fail(function( error ){
+          $("#login-link").prop('disabled',false);
+
           alert(error.responseJSON.message);
         });
 
