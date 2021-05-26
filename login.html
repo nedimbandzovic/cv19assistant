@@ -41,6 +41,9 @@
                       <div class="panel-body">
                           <form role="form">
                               <fieldset>
+
+                                <input id="change-password-token" name="token" type="hidden" value="">
+
                                 <div class="form-group">
                                     <input id="change-password" class="form-control" placeholder="Password" name="password" type="password" value="">
                                 </div>
@@ -48,7 +51,7 @@
                                   <div class="form-group">
 
                                   <!-- Change this to a button or input when using this as a form -->
-                                  <button id="forgot-link" onclick="doChangePassword();" class="btn btn-lg btn-success btn-block">Change Password</button>
+                                  <button id="change-link" onclick="doChangePassword()" class="btn btn-lg btn-success btn-block">Change Password</button>
                                 </div>
 
 
@@ -76,7 +79,7 @@
                                   <div class="form-group">
 
                                   <!-- Change this to a button or input when using this as a form -->
-                                  <button id="forgot-link" onclick="doForgotPassword();" class="btn btn-lg btn-success btn-block">Send Recovery Link</button>
+                                  <button id="forgot-link" onclick="doForgotPassword()" class="btn btn-lg btn-success btn-block">Send Recovery Link</button>
                                 </div>
 
                                   <div class="form-group pull-right">
@@ -108,7 +111,7 @@
                                     <div class="form-group">
 
                                     <!-- Change this to a button or input when using this as a form -->
-                                    <button id="login-link" onclick="doLogin();" class="btn btn-lg btn-success btn-block">Login</button>
+                                    <button id="login-link" onclick="doLogin()" class="btn btn-lg btn-success btn-block">Login</button>
                                   </div>
                                   <div class="form-group pull-left">
                                     <a href="#" onclick="showForgotForm()">Forgot password</a>
@@ -231,6 +234,12 @@
           }else{
             $('body').show();
           }
+
+          var urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('token')){
+              $("#change-password-token").val(urlParams.get('token'));
+              showChangePasswordForm();
+            }
         });
 
         function showRegisterForm(){
@@ -282,6 +291,9 @@
               });
 
             }
+
+
+
 
 
             function doRegister(){
@@ -361,10 +373,35 @@
 
         }
 
+        function showChangePasswordForm(){
+
+          $("#change-password-form-container").removeClass("hidden");
+          $("#login-form-container").addClass("hidden");
+          $("#register-form-container").addClass("hidden");
+          $("#forgot-form-container").addClass("hidden");
+
+        }
+
 
 
 var val=$('.form-select').val();
 
+function doChangePassword(){
+            var change_info = {
+              "token" : $("#change-password-token").val(),
+              "password" : $("#change-password").val(),
+            };
+
+            $("#change-link").prop('disabled',true);
+            $.post( "http://localhost/cv19assistant/api/reset", change_info).done(function(data) {
+              window.localStorage.setItem("token", data.token);
+              window.location = "index.html";
+            }).fail(function(error) {
+              $("#change-link").prop('disabled',false);
+              alert( error.responseJSON.message );
+            });
+
+          }
 
 
 
