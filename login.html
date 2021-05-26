@@ -78,12 +78,12 @@
 
         $.post("http://localhost/cv19assistant/api/login",login_info).done(function( data ){
           alert("Data loaded " + data);
+          window.location="index.html";
         }).fail(function( error ){
           alert(error.responseJSON.message);
         });
 
 
-          console.log(login_info);
 
 
         }
