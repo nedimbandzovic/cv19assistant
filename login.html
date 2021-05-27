@@ -20,6 +20,8 @@
 
         <!-- Custom Fonts -->
         <link href="./assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type="text/css">
+
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -100,7 +102,7 @@
                             <h3 class="panel-title">Please Sign In</h3>
                         </div>
                         <div class="panel-body">
-                            <form role="form">
+                            <form id="login-form"role="form">
                                 <fieldset>
                                     <div class="form-group">
                                         <input id="email" class="form-control" placeholder="E-mail" name="email" type="Email" autofocus>
@@ -222,6 +224,10 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="./assets/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+        <script src="./assets/js/utils.js"></script>
+
 
         <script type="text/javascript">
 
@@ -321,7 +327,7 @@
 
 
 
-                      $.post("http://localhost/cv19assistant/api/register",register_info).done(function( data ){
+                      $.post("api/register",register_info).done(function( data ){
                         console.log(data);
                         $("#register-form-container").addClass("hidden");
 
@@ -334,7 +340,7 @@
                         $("#login-link").prop('disabled',false);
                         console.log(error);
 
-                        alert(error.responseJSON.message);
+                        toastr.error(error.responseJSON.message);
                       });
 
             }
@@ -355,7 +361,7 @@
 
 
 
-        $.post("http://localhost/cv19assistant/api/login",login_info).done(function( data ){
+        $.post("api/login",login_info).done(function( data ){
 
           window.localStorage.setItem("token",data.token)
 
@@ -363,8 +369,7 @@
           window.location="index.html";
         }).fail(function( error ){
           $("#login-link").prop('disabled',false);
-
-          alert(error.responseJSON.message);
+          toastr.error(error.responseJSON.message);
         });
 
 
@@ -394,12 +399,12 @@ function doChangePassword(){
             };
 
             $("#change-link").prop('disabled',true);
-            $.post( "http://localhost/cv19assistant/api/reset", change_info).done(function(data) {
+            $.post( "api/reset", change_info).done(function(data) {
               window.localStorage.setItem("token", data.token);
               window.location = "index.html";
             }).fail(function(error) {
               $("#change-link").prop('disabled',false);
-              alert( error.responseJSON.message );
+              toastr.error(error.responseJSON.message);
             });
 
           }
