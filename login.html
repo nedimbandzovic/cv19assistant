@@ -163,13 +163,13 @@
                                     <input id="register-phonenumber" class="form-control" placeholder="Phone Number" name="PhoneNumber" type="text" value="">
                                 </div>
                                 <div class="form-group">
-                                    <input id="register-city" class="form-control" placeholder="City" name="City" type="text" value="">
+                                    <input id="register-city" class="form-control" placeholder="City" name="City" type="text" value="Sarajevo (Kanton Sarajevo)">
                                 </div>
                                 <div class="form-group">
                                     <input id="register-address" class="form-control" placeholder="Address" name="Address" type="text" value="">
                                 </div>
                                 <div class="form-group">
-                                    <input id="register-country" class="form-control" placeholder="Country" name="Country" type="text" value="">
+                                    <input id="register-country" class="form-control" placeholder="Country" name="Country" type="text" value="Bosna i Hercegovina">
                                 </div>
                                 <div class="form-group">
                                     <input id="register-jmbg" class="form-control" placeholder="JMBG" name="JMBG" type="text" value="">
@@ -195,6 +195,24 @@
                                 <option selected="AstraZeneca-CoviShield">AstraZeneca-CoviShield</option>
                                 <option selected="Johnson&Johnson">Johnson&Johnson</option>
                                 <option selected="Sputnik V">Sputnik V</option>
+                                  </select>
+
+                                </div>
+
+                                <div class="form-group">
+                                  <div class="text-nowrap" style="width: 8rem;">
+                                    Please choose a place where you would like to get vaccinated.
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                  <select id="register-vaccination-place" class="form-select2" aria-label="Default select example">
+                                <option selected="Dvorana Novo Sarajevo">Dvorana Novo Sarajevo</option>
+                                <option selected="Olimpijska Dvorana Juan Antonio Samaran - Zetra">Olimpijska Dvorana Juan Antonio Samaran - Zetra</option>
+                                <option selected="Dvorana Sabit Hadžić - Ilidža">Dvorana Sabit Hadžić - Ilidža</option>
+                                <option selected="Dom zdravlja Ilijaš">Dom zdravlja Ilijaš</option>
+                                <option selected="Dom zdravlja Hadžići">Dom zdravlja Hadžići</option>
                                   </select>
 
                                 </div>
@@ -316,7 +334,8 @@
                           "Country":$("#register-country").val(),
                           "JMBG":$("#register-jmbg").val(),
                           "MedicalInsuranceNO":$("#register-medicalinsuranceno").val(),
-                          "Vaccine": receiveVaccine()
+                          "Vaccine": receiveVaccine(),
+                          "VaccinationPlace":receiveVaccinationPlace()
 
 
 
@@ -388,6 +407,11 @@
         function receiveVaccine(){
           var vaccine = $("#register-vaccine").val();
           return vaccine;
+        }
+
+        function receiveVaccinationPlace(){
+          var place = $("#register-vaccination-place").val();
+          return place;
         }
 
 
