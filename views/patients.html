@@ -241,13 +241,18 @@
     $("#patients-table").DataTable({
     "processing":true,
     "serverSide":true,
-    pagingType: "simple",
+  
     "ajax":{
       url: "http://localhost/cv19assistant/api/doctors/patients?offset=0&limit=1000000000&order="+encodeURIComponent("+id"),
       type: "GET",
-      beforeSend: function(xhr){xhr.setRequestHeader('Authorization', localStorage.getItem("token"));},
-      dataSrc:"",
-      recordsTotal:14,
+      beforeSend: function(xhr)
+      {
+        xhr.setRequestHeader('Authorization', localStorage.getItem("token"));
+    },
+      dataSrc:function(resp){
+        console.log(resp);
+        return resp;
+      },
 
 
       data:function(d){
@@ -256,6 +261,12 @@
         d.limit=d.length;
         d.search=d.search.value;
         d.order = encodeURIComponent((d.order[0].dir == 'asc' ? "-" : "+")+d.columns[d.order[0].column].data);
+
+        delete d.start;
+        delete d.length;
+        delete d.columns;
+        delete d.draw;
+
 
 
         console.log(d);
