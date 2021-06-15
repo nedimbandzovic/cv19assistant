@@ -238,6 +238,54 @@
 
   function getPatients(){
 
+    $("#patients-table").DataTable({
+    "processing":true,
+    "serverSide":true,
+    "ajax":{
+      url: "http://localhost/cv19assistant/api/doctors/patients?offset=0&limit=1000000000&order="+encodeURIComponent("+id"),
+      type: "GET",
+      beforeSend: function(xhr){xhr.setRequestHeader('Authorization', localStorage.getItem("token"));},
+      dataSrc:"",
+
+      data:function(d){
+
+        d.offset=d.start;
+        d.limit=d.length;
+        d.search=d.search.value;
+        d.order = encodeURIComponent((d.order[0].dir == 'asc' ? "-" : "+")+d.columns[d.order[0].column].data);
+
+
+        console.log(d);
+      }
+    },
+    columns:[
+
+    {"data": "id"},
+    {"data": "accounts_id"},
+    {"data": "Name"},
+    {"data": "DateOfBirth"},
+    {"data": "PhoneNumber"},
+    {"data": "Email"},
+    {"data": "City"},
+    {"data": "Address"},
+    {"data": "Country"},
+    {"data": "JMBG"},
+    {"data": "MedicalInsuranceNO"},
+    {"data": "NumberOfDoses"},
+    {"data": "Vaccine"},
+    {"data": "VaccinationPlace"},
+    {"data": "VaccinationDate"},
+    {"data": "Status"}
+
+
+
+
+
+
+    ]
+  });
+
+/*
     $.ajax({
            url: "http://localhost/cv19assistant/api/doctors/patients?offset=0&limit=1000000000&order="+encodeURIComponent("+id"),
            type: "GET",
@@ -272,6 +320,8 @@
 
                }
         });
+        */
   }
+
 
 </script>

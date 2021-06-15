@@ -49,7 +49,7 @@ Flight::map('query', function($name, $default_value=NULL){
   $requests=Flight::request();
   $query_param=@$requests->query->getData()[$name];
   $query_param= $query_param ? $query_param:0;
-  return $query_param;
+  return urldecode($query_param);
 
 });
 

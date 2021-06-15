@@ -84,7 +84,7 @@ Flight::route('PUT /admin/accounts/@id', function($id){
 Flight::route('GET /doctors/patients', function(){
   $offset = Flight::query('offset', 0);
   $limit = Flight::query('limit', 25);
-  $search = Flight::query('search');
+  $search =  Flight::query('search');
   $order = Flight::query('order', "-id");
 
   Flight::json(Flight::patientService()->get_accounts($search, $offset, $limit, $order));
