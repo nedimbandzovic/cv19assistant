@@ -44,12 +44,11 @@ class UserService extends BaseService{
 
 
 
-    if(!isset($user['account'])) throw new Exception("Account field is needed");
+    if(!isset($user['Email'])) throw new Exception("Check your email");
 try {
   $this->dao->beginTransaction();
     $account=$this->accountDao->add([
 
-      "Nickname"=>$user['account'],
       "Name"=>$user['Name'],
       "Password"=>Utils::random_pwd(),
       "Email"=>$user['Email'],
@@ -87,7 +86,6 @@ try {
       $user=parent::add([
 
         "account_id"=>$account["id"],
-        "nickname"=>$account["Nickname"],
         "name"=>$account["Name"],
         "Email"=>$account["Email"],
 

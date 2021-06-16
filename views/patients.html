@@ -87,7 +87,10 @@
         <div class="modal-content">
           <form role="form" id="add-patient">
 
-            <div class="modal-header">
+          <input type="hidden" name="id"/>
+
+
+                        <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">Add patient</h4>
             </div>
@@ -95,10 +98,10 @@
 
               <form role="form" id="add-patient">
 
-                  <div class="form-group">
-                      <label>Nickname</label>
-                      <input type="text" name="account" class="form-control" placeholder="Enter the nickname of the account" required minlength="3">
-                  </div>
+                <input type="hidden" name="id"/>
+
+
+
                   <div class="form-group">
                       <label>Name and surname</label>
                       <input type="text" name="Name" class="form-control" placeholder="Enter your name and surname" required minlength="3">
@@ -185,6 +188,8 @@
             </div>
               </form>
         </div>
+
+
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
@@ -196,9 +201,14 @@
   submitHandler: function(form,event) {
 
 
-    console.log(jsonize_form($(form)));
-    addPatient(jsonize_form($(form)));
-
+    event.preventDefault();
+      var data = jsonize_form($(form));
+    console.log(data);
+     if (data.id){
+       updateEmailTemplate(data);
+     }else{
+       addPatient(data);
+     }
 
 
   }
@@ -207,12 +217,37 @@
 
   getPatients();
 
+  function updateEmailTemplate(patient){
+  console.log(patient);
+  $.ajax({
+      url: "http://localhost/cv19assistant/api/doctors/patients/"+patient.id,
+       type: "PUT",
+       data: JSON.stringify(patient),
+       contentType: "application/json",
+       beforeSend: function(xhr){xhr.setRequestHeader('Authorization', localStorage.getItem("token"));},
+       success: function(data) {
+         toastr.success("Patient info has been updated");
+         getPatients();
+         $("#add-patient").trigger("reset");
+         $("#add-patient *[name='id']").val("");
+         $('#add-patient-modal').modal("hide");
+         console.log(data);
+       },
+       error: function(jqXHR, textStatus, errorThrown ){
+         toastr.error("Failure");
+         console.log(jqXHR);
+       }
+    });
+}
+
+
   function addPatient(patient){
 
     $.ajax({
            url: "http://localhost/cv19assistant/api/register",
            type: "POST",
-           data:patient,
+           data: JSON.stringify(patient),
+         contentType: "application/json",
            beforeSend: function(xhr){xhr.setRequestHeader('Authorization', localStorage.getItem("token"));},
            success: function(data) {
              toastr.success("Patient has been successfully added");
@@ -239,20 +274,22 @@
   function getPatients(){
 
     $("#patients-table").DataTable({
-    "processing":true,
-    "serverSide":true,
-  
+      processing: true,
+      serverSide: true,
+      bDestroy: true,
+    //  pagingType: "simple",
+
     "ajax":{
       url: "http://localhost/cv19assistant/api/doctors/patients?offset=0&limit=1000000000&order="+encodeURIComponent("+id"),
       type: "GET",
-      beforeSend: function(xhr)
-      {
-        xhr.setRequestHeader('Authorization', localStorage.getItem("token"));
-    },
-      dataSrc:function(resp){
-        console.log(resp);
-        return resp;
-      },
+      beforeSend: function(xhr){
+           xhr.setRequestHeader('Authorization', localStorage.getItem("token"));
+         },
+         dataSrc: function(resp){
+           console.log(resp);
+           return resp;
+         },
+
 
 
       data:function(d){
@@ -283,7 +320,11 @@
 
     columns:[
 
-    {"data": "id"},
+    { "data": "id",
+              "render": function ( data, type, row, meta ) {
+                return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="openEditEmailTemplateModal('+data+')"><i class="fa fa-edit"></i></a>';
+              }
+            },
     {"data": "accounts_id"},
     {"data": "Name"},
     {"data": "DateOfBirth"},
@@ -305,8 +346,45 @@
 
 
 
-    ]
+  ],
   });
+}
+function openEditEmailTemplateModal(id){
+  $.ajax({
+
+    url:"http://localhost/cv19assistant/api/doctors/patients/"+id,
+    type:"GET",
+    beforeSend: function(xhr){xhr.setRequestHeader('Authorization', localStorage.getItem("token"));},
+    success:function(data){
+
+      $("#add-patient *[name='id']").val(data.id);
+      $("#add-patient *[name='accounts_id']").val(data.accounts_id);
+      $("#add-patient *[name='Name']").val(data.Name);
+      $("#add-patient *[name='DateOfBirth']").val(data.DateOfBirth);
+      $("#add-patient *[name='PhoneNumber']").val(data.PhoneNumber);
+      $("#add-patient *[name='Email']").val(data.Email);
+      $("#add-patient *[name='City']").val(data.City);
+      $("#add-patient *[name='Address']").val(data.Address);
+      $("#add-patient *[name='Country']").val(data.Country);
+      $("#add-patient *[name='JMBG']").val(data.JMBG);
+      $("#add-patient *[name='MedicalInsuranceNO']").val(data.MedicalInsuranceNO);
+      $("#add-patient *[name='NumberOfDoses']").val(data.NumberOfDoses);
+      $("#add-patient *[name='Vaccine']").val(data.Vaccine);
+        $("#add-patient *[name='VaccinationPlace']").val(data.VaccinationPlace);
+          $("#add-patient *[name='VaccinationDate']").val(data.VaccinationDate);
+            $("#add-patient *[name='Status']").val(data.Status);
+
+
+            $("#add-patient-modal").modal("show");
+      console.log(data);
+    },
+    error: function(jqXHR, textStatus, errorThrown ){
+              console.log(jqXHR);
+
+
+    }
+  });
+}
 
 /*
     $.ajax({
@@ -344,7 +422,7 @@
                }
         });
         */
-  }
+
 
 
 </script>

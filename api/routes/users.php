@@ -14,7 +14,6 @@
   *   @OA\RequestBody(description="Basic account info", required=true,
   *       @OA\MediaType(mediaType="application/json",
   *    			@OA\Schema(
-  *    				 @OA\Property(property="account", required="true", type="string", example="My Test Account",	description="Name of the account" ),
   *    				 @OA\Property(property="Name", required="true", type="string", example="My Test Account",	description="Name of the account" ),
   *    				 @OA\Property(property="Email", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
  *    				 @OA\Property(property="DateOfBirth", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
@@ -269,4 +268,15 @@ Flight::route('POST /reset', function(){
  Flight::route('GET /doctors/@id', function($id){
 
    Flight::json(Flight::doctorService()->get_by_id($id));
+ });
+
+ /**
+  * @OA\Get(path="/doctors/patients/{id}", tags={"Doctors"}, security={{"ApiKeyAuth": {}}},
+  *     @OA\Parameter(type="integer", in="path", name="id", default=1, description="Id of account"),
+  *     @OA\Response(response="200", description="Fetch individual account")
+  * )
+  */
+ Flight::route('GET /doctors/patients/@id', function($id){
+
+   Flight::json(Flight::patientService()->get_by_id($id));
  });

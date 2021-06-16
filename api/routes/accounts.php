@@ -89,10 +89,8 @@ Flight::route('PUT /admin/accounts/@id', function($id){
  *     @OA\Response(response="200", description="Update account based on id")
  * )
  */
-Flight::route('PUT /doctors/patients/@id', function($id){
-  $data = Flight::request()->data->getData();
-  Flight::json(Flight::patientService()->update($id, $data));
-
+ Flight::route('PUT /doctors/patients/@id', function($id){
+Flight::json(Flight::patientService()->update_email_template(Flight::get('user'), intval($id), Flight::request()->data->getData()));
 });
 
 
