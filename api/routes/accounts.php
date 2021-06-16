@@ -97,6 +97,7 @@ Flight::json(Flight::patientService()->update_email_template(Flight::get('user')
 /**
  * @OA\Get(
  *     path="/doctors/patients",tags={"Doctors"},  security={{"ApiKeyAuth":{}}},
+
  *        @OA\Parameter(type="integer", in="query", name="offset", default=0, description="Offset for pagination"),
  *     @OA\Parameter(type="integer", in="query", name="limit", default=25, description="Limit for pagination"),
  *     @OA\Parameter(type="string", in="query", name="search", description="Search string for accounts. Case insensitive search."),
@@ -105,13 +106,15 @@ Flight::json(Flight::patientService()->update_email_template(Flight::get('user')
  * )
  */
 Flight::route('GET /doctors/patients', function(){
+ $account_id = Flight::get('user');
   $offset = Flight::query('offset', 0);
   $limit = Flight::query('limit', 25);
-  $search =  Flight::query('search');
-  $order = Flight::query('order', "-id");
+  $search = Flight::query('search');
+  $order = Flight::query('order', '-id');
 
-  Flight::json(Flight::patientService()->get_accounts($search, $offset, $limit, $order));
-
+  $total = Flight::patientService()->get_email_templates($account_id, $offset, $limit, $search, $order, TRUE);
+  header('total-records: ' . $total['total']);
+  Flight::json(Flight::patientService()->get_email_templates($account_id, $offset, $limit, $search, $order));
 });
 
  ?>
