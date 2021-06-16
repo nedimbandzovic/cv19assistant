@@ -111,6 +111,7 @@ Flight::route('GET /doctors/patients', function(){
   $order = Flight::query('order', "-id");
 
   Flight::json(Flight::patientService()->get_accounts($search, $offset, $limit, $order));
+
 });
 
  ?>

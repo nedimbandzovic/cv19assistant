@@ -17,6 +17,11 @@ class PatientService extends BaseService{
     $this->dao=new PatientDao();
   }
 
+  public function get_email_templates($account_id,$offset,$limit,$search,$order,$total=FALSE){
+
+    return $this->dao->get_email_templates($account_id,$offset, $limit, $search, $order, $total);
+  }
+
     public function get_accounts($search, $offset, $limit, $order){
         if ($search){
           return $this->dao->get_accounts($search, $offset, $limit, $order);
