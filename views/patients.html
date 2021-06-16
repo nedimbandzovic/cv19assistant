@@ -277,7 +277,15 @@
       processing: true,
       serverSide: true,
       bDestroy: true,
-    //  pagingType: "simple",
+    pagingType: "simple",
+
+    "language": {
+           "lengthMenu": "Display _MENU_ records per page",
+           "zeroRecords": "Nothing found - sorry",
+           "info": "Showing page _PAGE_ of many",
+           "infoEmpty": "No records available",
+           "infoFiltered": "(filtered from _MAX_ total records)"
+       },
 
     "ajax":{
       url: "http://localhost/cv19assistant/api/doctors/patients?offset=0&limit=1000000000&order="+encodeURIComponent("+id"),
@@ -311,8 +319,18 @@
     },
 
     preDrawCallback: function( settings ) {
-      settings._iRecordsTotal=100;
-      settings._iRecordsDisplay=10;
+      if (settings.aoData.length < settings._iDisplayLength){
+        //disable pagination
+        settings._iRecordsTotal=0;
+        settings._iRecordsDisplay=0;
+
+
+      }
+      else{
+        //enable
+        settings._iRecordsTotal=1000000;
+        settings._iRecordsDisplay=1000000;
+      }
       console.log(settings);
        },
 
