@@ -13,28 +13,20 @@
 
 
 
-              <form role="form" id="add-patient">
+          <label>Vaccines</label>
+          <select  type="text" name="Vaccines" class="form-control" id="Vakcine">
+              <option value="1">Sputnik V</option>
+              <option value="2">Sinopharm-BBiPV</option>
+              <option value="3">AstraZeneca-CoviSHIELD</option>
+              <option value="4">SinoVAC</option>
+              <option value="5">Pfizer-BioNTech</option>
+              <option value="6">Moderna</option>
+              <option value="7">Johnson&Johnson</option>
 
 
-                  <div class="form-group">
-                      <label>Vaccines</label>
-                      <select  type="text" name="Vaccine" class="form-control" required>
-                          <option>Sputnik V</option>
-                          <option>Sinopharm-BBiPV</option>
-                          <option>AstraZeneca-CoviSHIELD</option>
-                          <option>SinoVAC</option>
-                          <option>Pfizer-BioNTech</option>
-                          <option>Moderna</option>
-                          <option>Johnson&Johnson</option>
-
-
-                      </select>
-                  </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Choose</button>
+          </select>
 
             </div>
-              </form>
         </div>
 
 
@@ -45,9 +37,22 @@
 
 <script type="text/javascript">
 
-  if($_POST['add-patient'] == 'Sputnik V'){
-    alert("Nedim");
-  }
+    check();
+
+
+
+  function check(){
+
+    if ($("Vakcine option:selected").text()=="Sputnik V"){
+      toastr.success("yeey");
+    }
+
+
+
+
+}
+
+
 
 
 
