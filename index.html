@@ -177,7 +177,7 @@
               window.location="login.html";
             }else{
               $('body').show();
-              var user_info=parse_jwt(window.localStorage.getItem("token"));
+              var user_info=CSUtils.parse_jwt(window.localStorage.getItem("token"));
               if (user_info.role!="DOCTOR"){
 
                 $(".admin-staff").remove();

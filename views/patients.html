@@ -202,7 +202,7 @@
 
 
     event.preventDefault();
-      var data = jsonize_form($(form));
+      var data = CSUtils.jsonize_form($(form));
     console.log(data);
      if (data.id){
        updateEmailTemplate(data);
@@ -376,25 +376,8 @@ function openEditEmailTemplateModal(id){
     beforeSend: function(xhr){xhr.setRequestHeader('Authorization', localStorage.getItem("token"));},
     success:function(data){
 
-      $("#add-patient *[name='id']").val(data.id);
-      $("#add-patient *[name='accounts_id']").val(data.accounts_id);
-      $("#add-patient *[name='Name']").val(data.Name);
-      $("#add-patient *[name='DateOfBirth']").val(data.DateOfBirth);
-      $("#add-patient *[name='PhoneNumber']").val(data.PhoneNumber);
-      $("#add-patient *[name='Email']").val(data.Email);
-      $("#add-patient *[name='City']").val(data.City);
-      $("#add-patient *[name='Address']").val(data.Address);
-      $("#add-patient *[name='Country']").val(data.Country);
-      $("#add-patient *[name='JMBG']").val(data.JMBG);
-      $("#add-patient *[name='MedicalInsuranceNO']").val(data.MedicalInsuranceNO);
-      $("#add-patient *[name='NumberOfDoses']").val(data.NumberOfDoses);
-      $("#add-patient *[name='Vaccine']").val(data.Vaccine);
-        $("#add-patient *[name='VaccinationPlace']").val(data.VaccinationPlace);
-          $("#add-patient *[name='VaccinationDate']").val(data.VaccinationDate);
-            $("#add-patient *[name='Status']").val(data.Status);
-
-
-            $("#add-patient-modal").modal("show");
+      json2form("#add-email-template", data);
+      $("#add-patient-modal").modal("show");
       console.log(data);
     },
     error: function(jqXHR, textStatus, errorThrown ){
