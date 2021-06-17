@@ -165,7 +165,9 @@
 
         <script type="text/javascript">
           $(document).ready(function() {
-            var app = $.jQuerySPApp({defaultView  : "dashboard"}); // initialize
+            var app = $.jQuerySPApp({defaultView  : "dashboard"});
+            app.route({view: "patients", load:"patients.html", onCreate:function() {}, onReady: function() {Patients.init()}
+      }); // initialize
 
 
 
@@ -197,6 +199,8 @@
         </script>
         <script src="./assets/js/utils.js"></script>
         <script src="./assets/js/restClient.js"></script>
+        <script src="./assets/js/controllers/patients.js"></script>
+
 
 
         <script src="./assets/js/dataTables/jquery.dataTables.min.js"></script>
