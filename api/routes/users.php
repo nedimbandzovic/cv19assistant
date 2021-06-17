@@ -16,15 +16,15 @@
   *    			@OA\Schema(
   *    				 @OA\Property(property="Name", required="true", type="string", example="My Test Account",	description="Name of the account" ),
   *    				 @OA\Property(property="Email", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
- *    				 @OA\Property(property="DateOfBirth", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
- *    				 @OA\Property(property="PhoneNumber", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
+ *    				 @OA\Property(property="DateOfBirth", required="true", type="string", example="Your date of birth",	description="Email of the account" ),
+ *    				 @OA\Property(property="PhoneNumber", required="true", type="string", example="Phone number (BiH network)",	description="Email of the account" ),
 
- *    				 @OA\Property(property="City", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
- *    				 @OA\Property(property="Address", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
- *    				 @OA\Property(property="Country", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
- *    				 @OA\Property(property="JMBG", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
- *    				 @OA\Property(property="MedicalInsuranceNO", required="true", type="int", example="Any kind of email",	description="Email of the account" ),
- *    				 @OA\Property(property="Vaccine", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
+ *    				 @OA\Property(property="City", required="true", type="string", example="City",	description="Email of the account" ),
+ *    				 @OA\Property(property="Address", required="true", type="string", example="Address",	description="Email of the account" ),
+ *    				 @OA\Property(property="Country", required="true", type="string", example="Country",	description="Email of the account" ),
+ *    				 @OA\Property(property="JMBG", required="true", type="string", example="JMBG",	description="Email of the account" ),
+ *    				 @OA\Property(property="MedicalInsuranceNO", required="true", type="int", example="MedicalInsuranceNO",	description="Email of the account" ),
+ *    				 @OA\Property(property="Vaccine", required="true", type="string", example="Vaccine",	description="Email of the account" ),
 
 
   *          )

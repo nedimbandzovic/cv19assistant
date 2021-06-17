@@ -79,10 +79,17 @@ Flight::route('PUT /admin/accounts/@id', function($id){
  *       @OA\MediaType(mediaType="application/json",
  *    			@OA\Schema(
  *    				 @OA\Property(property="Name", required="true", type="string", example="My Test Account",	description="Name of the account" ),
- *    				 @OA\Property(property="Email", required="true", type="string", example="hahahah@gmail.com",	description="Email of the account" ),
+*             @OA\Property(property="DateOfBirth", required="true", type="string", example="hahahah@gmail.com",	description="Email of the account" ),
+*             @OA\Property(property="PhoneNumber", required="true", type="string", example="hahahah@gmail.com",	description="Email of the account" ),
+   *    				 @OA\Property(property="PhoneNumber", required="true", type="string", example="hahahah@gmail.com",	description="Email of the account" ),
+*				 @OA\Property(property="City", required="true", type="string", example="hahahah@gmail.com",	description="Email of the account" ),
+ *    				 @OA\Property(property="Address", required="true", type="string", example="hahahah@gmail.com",	description="Email of the account" ),
+ *    				 @OA\Property(property="Country", required="true", type="string", example="hahahah@gmail.com",	description="Email of the account" ),
+ *    				 @OA\Property(property="JMBG", required="true", type="string", example="hahahah@gmail.com",	description="Email of the account" ),
+ *    				 @OA\Property(property="MedicalInsuranceNO", required="true", type="string", example="hahahah@gmail.com",	description="Email of the account" ),
+ *    				 @OA\Property(property="Vaccine", required="true", type="string", example="hahahah@gmail.com",	description="Email of the account" ),
+ *    				 @OA\Property(property="VaccinationPlace", required="true", type="string", example="hahahah@gmail.com",	description="Email of the account" )
 
-
- *    				 @OA\Property(property="Status", type="string", example="ACTIVE",	description="Account status" )
  *          )
  *       )
  *     ),

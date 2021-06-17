@@ -26,12 +26,11 @@ class PatientService extends BaseService{
       }
 
       public function update_email_template($user, $id, $email_template){
-        $db_template = $this->dao->get_by_id($id);
-        if ($db_template['accounts_id'] != $user['aid']){
-          throw new Exception("Invalid email template", 403);
-        }
-        return $this->update($id, $email_template);
+  $db_template = $this->dao->get_by_id($id);
+
+  return $this->update($id, $email_template);
 }
+
 
 public function get_email_templates($account_id, $offset, $limit, $search, $order, $total = FALSE){
    return $this->dao->get_email_templates($account_id, $offset, $limit, $search, $order, $total);
