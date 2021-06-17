@@ -9,7 +9,7 @@
         <!-- /.row -->
         <div class="row">
 
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-patient-modal">
+        <button  style="margin-left:5px;" type="button" class="btn btn-success" data-toggle="modal" data-target="#add-patient-modal">
           + Add patient
         </button>
         <br>
@@ -277,16 +277,17 @@
       processing: true,
       serverSide: true,
       bDestroy: true,
-    //pagingType: "simple",
+    pagingType: "simple",
 
-  /*  "language": {
-           "lengthMenu": "Display _MENU_ records per page",
+    responsive:true,
+
+  "language": {
            "zeroRecords": "Nothing found - sorry",
            "info": "Showing page _PAGE_ of many",
            "infoEmpty": "No records available",
            "infoFiltered": "(filtered from _MAX_ total records)"
        },
-       */
+
 
     "ajax":{
       url: "http://localhost/cv19assistant/api/doctors/patients?offset=0&limit=1000000000&order="+encodeURIComponent("+id"),
@@ -320,11 +321,11 @@
     },
 
     preDrawCallback: function( settings ) {
-     if ( settings.jqXHR){
+     /*if ( settings.jqXHR){
      settings._iRecordsTotal = settings.jqXHR.getResponseHeader('total-records');
      settings._iRecordsDisplay = settings.jqXHR.getResponseHeader('total-records');
-   }
-   /*  if (settings.aoData.length < settings._iDisplayLength){
+   }*/
+    if (settings.aoData.length < settings._iDisplayLength){
        //disable pagination
        settings._iRecordsTotal=0;
        settings._iRecordsDisplay=0;
@@ -332,7 +333,7 @@
        //enable pagination
        settings._iRecordsTotal=100000000;
        settings._iRecordsDisplay=1000000000;
-     } */
+     }
    },
 
 
@@ -340,7 +341,7 @@
 
     { "data": "id",
               "render": function ( data, type, row, meta ) {
-                return '<span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="openEditEmailTemplateModal('+data+')"><i class="fa fa-edit"></i></a>';
+                return '<div style="min-width:60px;"> <span class="badge">'+data+'</span><a class="pull-right" style="font-size: 15px; cursor: pointer;" onclick="openEditEmailTemplateModal('+data+')"><i class="fa fa-edit"></i></a> </div>';
               }
             },
     {"data": "accounts_id"},
