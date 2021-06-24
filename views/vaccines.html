@@ -14,7 +14,9 @@
 
 
           <label>Vaccines</label>
-          <select  type="text" name="Vaccines" class="form-control" id="Vakcine">
+          <select  type="text" name="Vaccines" class="form-control" id="Vakcine" onchange="getSelectValue();">
+            <option value="0">Choose a vaccine</option>
+
               <option value="1">Sputnik V</option>
               <option value="2">Sinopharm-BBiPV</option>
               <option value="3">AstraZeneca-CoviSHIELD</option>
@@ -26,7 +28,13 @@
 
           </select>
 
+
+
             </div>
+
+            <div class="panel-heading" type="text" id="myText">
+                   <h3 class="panel-title">Hello</h3>
+               </div>
         </div>
 
 
@@ -37,20 +45,41 @@
 
 <script type="text/javascript">
 
-    check();
+  getSelectValue();
+
+
+    function getSelectValue()
+          {
+              var selectedValue = document.getElementById("Vakcine").value;
+              if (selectedValue==1){
+                toastr.success("You have selected Sputnik V");
+                document.getElementById("myText").value = "Johnny Bravo";
+
+              }
+              else if (selectedValue==2){
+                toastr.success("You have selected Sinopharm-BBiPV");
+              }
+              else if (selectedValue==3){
+                toastr.success("You have selected AstraZeneca-CoviSHIELD");
+              }
+              else if (selectedValue==4){
+                toastr.success("You have selected SinoVAC");
+              }
+              else if (selectedValue==5){
+                toastr.success("You have selected Pfizer-BioNTech");
+              }
+              else if (selectedValue==6){
+                toastr.success("You have selected Moderna");
+              }
+              else if (selectedValue==7){
+                toastr.success("You have selected Johnson&Johnson");
+              }
+
+          }
 
 
 
-  function check(){
 
-    if ($("Vakcine option:selected").text()=="Sputnik V"){
-      toastr.success("yeey");
-    }
-
-
-
-
-}
 
 
 
