@@ -138,7 +138,10 @@ public function confirm($token){
     $this->dao->update($user['id'], ["status" => "ACTIVE", "token"=>NULL]);
     $this->accountDao->update($user['account_id'], ["Status" => "ACTIVE"]);
 
-    echo "Account confirmation successful";
+    echo "Account confirmation successful, wait for 10 seconds";
+
+    header('Refresh: 10; URL=http://localhost/cv19assistant/login.html');
+    die();
 
 
 
