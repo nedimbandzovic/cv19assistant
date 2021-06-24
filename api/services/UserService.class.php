@@ -138,6 +138,8 @@ public function confirm($token){
     $this->dao->update($user['id'], ["status" => "ACTIVE", "token"=>NULL]);
     $this->accountDao->update($user['account_id'], ["Status" => "ACTIVE"]);
 
+    echo "Account confirmation successful";
+
 
 
 
