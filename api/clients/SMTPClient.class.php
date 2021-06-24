@@ -29,7 +29,7 @@ public function send_register_user_token($user) {
   $message = (new Swift_Message('Confirmation of your account'))
     ->setFrom(['bandzosteam@gmail.com' => 'Coronavirus Assistant'])
     ->setTo([$user['Email']])
-    ->setBody('Confirm your account by clicking the URL:http://localhost/cv19assistant/api/confirm/'.$user["token"]);
+    ->setBody('Confirm your account by clicking the URL:http://localhost/cv19assistant/api/confirm/'.$user["token"]. ', password for your account is:'. $user["password"]);
 
 
   $this->mailer->send($message);
