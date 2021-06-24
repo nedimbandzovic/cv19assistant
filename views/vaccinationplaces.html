@@ -1,0 +1,139 @@
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Vaccination places in Sarajevo</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <label>Vaccination places</label>
+        <select  type="text" name="Vaccines" class="form-control" id="VakcineMjesta" onchange="getSelectValue();">
+          <option value="0">Choose a place</option>
+
+            <option value="1">Dom zdravlja Ilidža</option>
+            <option value="2">Dom zdravlja Hadžići</option>
+            <option value="3">Olympic Hall "Juan Antonio Samaranch" - Zetra</option>
+            <option value="4">Sports Hall "Goran Čengić" - Novo Sarajevo</option>
+            <option value="5">Dom zdravlja Ilijaš</option>
+
+
+
+        </select>
+
+        </div>
+
+
+        <div class="text-center">
+          <img src="img/sarajevo.jpg" style="max-width:100%;" class="rounded float-left" alt="Responsive image" id="myImg">
+        </div>
+
+
+        <div class="title">
+          <h2>Name of the vaccination venue</h2>
+        </div>
+        <p id="p1">Nothing is chosen now</p>
+
+
+        <div class="title">
+          <h2>Information and working hours</h2>
+        </div>
+        <p id="p2">Nothing is chosen now</p>
+
+
+
+
+        <div class="title">
+          <h2>Location</h2>
+        </div>
+<iframe id="p3" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92005.50765548185!2d18.312951641838094!3d43.89370191131433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758cbb1ed719bd1%3A0x562ecda6de87b33e!2sSarajevo!5e0!3m2!1shr!2sba!4v1624551691681!5m2!1shr!2sba" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+
+<div class="title">
+  <h2>Telephone</h2>
+</div>
+<p id="p4">Nothing is chosen now</p>
+
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script type="text/javascript">
+
+  getSelectValue();
+
+
+    function getSelectValue()
+          {
+              var selectedValue = document.getElementById("VakcineMjesta").value;
+              if (selectedValue==1){
+                toastr.success("You have selected Dom zdravlja Ilidža");
+                document.getElementById("p1").innerHTML = "Dom zdravlja Ilidža" ;
+                document.getElementById("p2").innerHTML = "Working days: 09:00 - 19:00 /Saturdays 11:00 - 15:00 / Sundays are non-working days" ;
+                document.getElementById("p3").src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2878.2433723761774!2d18.30833701546543!3d43.830051479115546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758ca3fd7b310fb%3A0x7af7c3d11d2a09f9!2sDom%20zdravlja%20Ilid%C5%BEa!5e0!3m2!1shr!2sba!4v1624551773102!5m2!1shr!2sba" ;
+                document.getElementById("p4").innerHTML = "+38733625033" ;
+
+                }
+              else  if (selectedValue==2){
+                  toastr.success("You have selected Dom zdravlja Hadžići");
+                  document.getElementById("p1").innerHTML = "Dom zdravlja Hadžići" ;
+                  document.getElementById("p2").innerHTML = "Working days: 09:00 - 19:00 /Saturdays 11:00 - 15:00 / Sundays are non-working days" ;
+                  document.getElementById("p3").src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2878.606445814628!2d18.198584315465165!3d43.822522079115856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475f4aa3a8054deb%3A0xc91e045ce93370e7!2sDom%20zdravlja%20Had%C5%BEi%C4%87i!5e0!3m2!1shr!2sba!4v1624552030690!5m2!1shr!2sba" ;
+                  document.getElementById("p4").innerHTML = "+38733420109" ;
+
+                  }
+            else      if (selectedValue==3){
+                    toastr.success("You have selected Olympic Hall Juan Antonio Samaranch - Zetra");
+                    document.getElementById("p1").innerHTML = "Olympic Hall Juan Antonio Samaranch - Zetra" ;
+                    document.getElementById("p2").innerHTML = "Working days: 09:00 - 19:00 /Saturdays 11:00 - 15:00 / Sundays are non-working days" ;
+                    document.getElementById("p4").innerHTML = "+38733212035" ;
+
+
+                  document.getElementById("p3").src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2876.227294235557!2d18.40730711546682!3d43.871842079114366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758ced4859a042f%3A0xb2741db70615ff0f!2sOlimpijska%20dvorana%20%22Juan%20Antonio%20Samaranch%22!5e0!3m2!1shr!2sba!4v1624552095198!5m2!1shr!2sba" ;
+                    }
+              else      if (selectedValue==4){
+                      toastr.success("You have selected Sports Hall Goran Čengić - Novo Sarajevo");
+                      document.getElementById("p1").innerHTML = "Sports Hall Goran Čengić - Novo Sarajevo" ;
+                      document.getElementById("p2").innerHTML = "Working days: 09:00 - 19:00 /Saturdays 11:00 - 15:00 / Sundays are non-working days" ;
+                      document.getElementById("p4").innerHTML = "+38733724700" ;
+
+                      document.getElementById("p3").src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2877.4160463316675!2d18.38659081546602!3d43.84720467911527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c91a566bc019%3A0xb3e8bdcc06a7813c!2zU3BvcnRza2EgZHZvcmFuYSAiR29yYW4gxIxlbmdpxIci!5e0!3m2!1shr!2sba!4v1624552126216!5m2!1shr!2sba" ;
+                      }
+              else        if (selectedValue==5){
+                        toastr.success("You have selected Dom zdravlja Ilijaš");
+                        document.getElementById("p1").innerHTML = "Dom zdravlja Ilijaš" ;
+                        document.getElementById("p2").innerHTML = "Working days: 09:00 - 19:00 /Saturdays 11:00 - 15:00 / Sundays are non-working days" ;
+                        document.getElementById("p4").innerHTML = "+38733584350" ;
+
+                        document.getElementById("p3").src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2872.1306138905175!2d18.264889315469595!3d43.95666327911189!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475f328ee391c56f%3A0x782b4fad6e00215b!2sDom%20zdravlja%20Ilija%C5%A1!5e0!3m2!1shr!2sba!4v1624552164273!5m2!1shr!2sba" ;
+                        }
+
+
+                        else{
+                          toastr.success("Returned to dropdown menu");
+                          document.getElementById("myImg").src="img/sarajevo.jpg";
+                          document.getElementById("p1").innerHTML="Nothing is chosen now";
+                          document.getElementById("p2").innerHTML="Nothing is chosen now";
+                          document.getElementById("p4").innerHTML="Nothing is chosen now";
+                          document.getElementById("p3").src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92005.50765548185!2d18.312951641838094!3d43.89370191131433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758cbb1ed719bd1%3A0x562ecda6de87b33e!2sSarajevo!5e0!3m2!1shr!2sba!4v1624551691681!5m2!1shr!2sba" ;
+
+
+
+                        }
+
+
+
+          }
+
+
+
+
+
+
+
+
+
+
+
+</script>
