@@ -36,7 +36,7 @@
                   </dl>
                 </div>-->
                 <div class=" col-md-9 col-lg-9 ">
-                  <table class="table table-user-information" id="table">
+                  <table class="table table-user-information" style="margin: 0px;"">
                     <tbody>
                       <tr>
                         <td>Name and surname:</td>
@@ -74,55 +74,56 @@
                     <script type="text/javascript">
 
                       $(document).ready(function() {
-              var user_info = CStils.parse_jwt(window.localStorage.getItem("token"));
-        if (user_info.r == "PATIENT"){
-          getProfile();
-        }
+                    var user_info = CSUtils.parse_jwt(window.localStorage.getItem("token"));
+                    getProfile();
 
-        $('body').show();
+                });
 
-    });
-
-                      function getProfile(){
-
-    $.ajax({
-       url: 'http://localhost/cv19assistant/api/patients/profiles/',
-       type: 'GET',
-       beforeSend: function(xhr){
-         if (localStorage.getItem("token")){ // optional header token due login and other endpoints
-           xhr.setRequestHeader('Authorization', localStorage.getItem("token"));
-         }
-       },
-       async: false,
-       cache: false,
-       timeout: 30000,
-       fail: function(){
-           return true;
-       },
-       done: function(msg){
-           if (parseFloat(msg)){
-               return false;
-           } else {
-               return true;
-           }
-       },
-       success: function(data) {
-         var td = document.getElementyById('name');
-         td.textContent= data.Name;
+                function getProfile(){
+                  var user_info = CSUtils.parse_jwt(window.localStorage.getItem("token"));
+                  var id= user_info.account_id;
+                  console.log(id);
 
 
+                  $.ajax({
+                     url: 'https://localhost/cv19assistant/api/patients/profiles/'.id,
+                     type: 'GET',
+                     beforeSend: function(xhr){
+                       if (localStorage.getItem("token")){ // optional header token due login and other endpoints
+                         xhr.setRequestHeader('Authorization', localStorage.getItem("token"));
+                       }
+
+                     },
+                     async: false,
+                     cache: false,
+                     timeout: 30000,
+                     fail: function(){
+                         return true;
+                     },
+                     done: function(msg){
+                         if (parseFloat(msg)){
+                             return false;
+                         } else {
+                             return true;
+                         }
+                     },
+                     success: function(data) {
+
+                       document.getElementById("name").innerHTML = data.Name;
+                      document.getElementById("vacDate").innerHTML = data.VaccinationDate;
+                      document.getElementById("vac").innerHTML = data.Vaccine;
+                      document.getElementById("City").innerHTML = data.City;
+                      document.getElementById("Country").innerHTML = data.Country;
+                      document.getElementById("Email").innerHTML = data.Email;
 
 
 
-       },
-       error: function(jqXHR, textStatus, errorThrown ){
-         if (error){
-           error(jqXHR, textStatus, errorThrown);
-         }else{
-           toastr.error(jqXHR.responseJSON.message);
-         }
-       }
-   });
-  }
+}
+
+
+                 });
+                }
+
+
 
                   </script>
