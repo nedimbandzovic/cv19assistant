@@ -88,17 +88,14 @@
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
 
-                            <li>
-                                <a href="#dashboard" class="active"><i class="fa fa-home   fa-fw"></i> Dashboard</a>
-                            </li>
-
+                          <li>
+                              <a href="#personalinfo" class="active"><i class="fa fa-user   fa-fw"></i> Personal Information</a>
+                          </li>
                             <li>
                                 <a href="#news" class="active"><i class="fa fa-map-marker fa-fw"></i> COVID-19 map</a>
                             </li>
 
-                            <li>
-                                <a href="#personalinfo" class="active"><i class="fa fa-user   fa-fw"></i> Personal Information</a>
-                            </li>
+
 
                             <li>
                                 <a href="#vaccines" class="active"><i class="fa fa-plus fa-fw"></i> Vaccines</a>
@@ -174,7 +171,7 @@
 
         <script type="text/javascript">
           $(document).ready(function() {
-            var app = $.jQuerySPApp({defaultView  : "dashboard"});
+            var app = $.jQuerySPApp({defaultView  : "personalinfo"});
             app.route({view: "patients", load:"patients.html", onCreate:function() {}, onReady: function() {Patients.init()}
       }); // initialize
 
