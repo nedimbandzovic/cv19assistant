@@ -7,6 +7,7 @@ class BaseService{
       return $this->dao->get_by_id($id);
     }
 
+
     public function add($data){
       return $this->dao->add($data);
     }

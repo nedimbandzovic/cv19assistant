@@ -8,6 +8,8 @@ require_once dirname(__FILE__).'/../clients/SMTPClient.class.php';
 require_once dirname(__FILE__).'/../dao/PatientDao.class.php';
 require_once dirname(__FILE__).'/../dao/DoctorsDao.class.php';
 require_once dirname(__FILE__).'/../clients/SMTPClient.class.php';
+require_once dirname(__FILE__).'/../dao/BaseDao.class.php';
+
 
 
 
@@ -35,6 +37,8 @@ class PatientService extends BaseService{
 public function get_email_templates($account_id, $offset, $limit, $search, $order, $total = FALSE){
    return $this->dao->get_email_templates($account_id, $offset, $limit, $search, $order, $total);
  }
+
+
 
 
 

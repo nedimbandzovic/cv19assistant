@@ -88,7 +88,7 @@ function add($entity){
 }
 
 function update($id, $entity){
-  
+
   return $this->execute_update($this->table,$id,$entity);
 
 
@@ -97,6 +97,8 @@ function update($id, $entity){
 public function get_by_id($id){
     return $this->query_unique("SELECT * FROM ".$this->table." WHERE id = :id", ["id" => $id]);
   }
+
+
 
   public function get_all($offset = 0, $limit = 25, $order="-id"){
       list($order_column, $order_direction) = self::parse_order($order);
