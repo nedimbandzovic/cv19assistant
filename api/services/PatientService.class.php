@@ -38,6 +38,10 @@ public function get_email_templates($account_id, $offset, $limit, $search, $orde
    return $this->dao->get_email_templates($account_id, $offset, $limit, $search, $order, $total);
  }
 
+ public function get_by_accounts_id($account_id){
+    return $this->dao->get_user_by_accounts_id($account_id);
+  }
+
 
 
 
