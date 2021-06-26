@@ -208,12 +208,11 @@ public function confirm($token){
     public function registerDoctor ($user){
 
 
-      if(!isset($user['account'])) throw new Exception("Account field is needed");
+      if(!isset($user['Email'])) throw new Exception("Email field is needed");
   try {
     $this->dao->beginTransaction();
       $account=$this->accountDao->add([
 
-        "Nickname"=>$user['account'],
         "Name"=>$user['Name'],
         "Password"=>Utils::random_pwd(),
         "Email"=>$user['Email'],
@@ -245,7 +244,6 @@ public function confirm($token){
         $user=parent::add([
 
           "account_id"=>$account["id"],
-          "nickname"=>$account["Nickname"],
           "name"=>$account["Name"],
           "Email"=>$account["Email"],
 

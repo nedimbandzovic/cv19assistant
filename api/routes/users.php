@@ -120,7 +120,6 @@ Flight::route('POST /reset', function(){
   *   @OA\RequestBody(description="Basic account info", required=true,
   *       @OA\MediaType(mediaType="application/json",
   *    			@OA\Schema(
-  *    				 @OA\Property(property="account", required="true", type="string", example="My Test Account",	description="Name of the account" ),
   *    				 @OA\Property(property="Name", required="true", type="string", example="My Test Account",	description="Name of the account" ),
   *    				 @OA\Property(property="Email", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
  *    				 @OA\Property(property="InstitutionName", required="true", type="string", example="Any kind of email",	description="Email of the account" ),
@@ -140,7 +139,6 @@ Flight::route('POST /reset', function(){
      $data=Flight::request()->data->getData();
      Flight::json(Flight::userService()->registerDoctor($data));
 
-     Flight::json(["message"=>"Check your email for confirmation link"]);
 
 
  });
