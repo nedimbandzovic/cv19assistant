@@ -88,24 +88,24 @@
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
 
-                          <li>
+                          <li class="patient-info">
                               <a href="#personalinfo" class="active"><i class="fa fa-user   fa-fw"></i> Personal Information</a>
                           </li>
-                            <li>
+                          <li class="patient-info">
                                 <a href="#news" class="active"><i class="fa fa-map-marker fa-fw"></i> COVID-19 map</a>
                             </li>
 
 
 
-                            <li>
+                            <li class="patient-info">
                                 <a href="#vaccines" class="active"><i class="fa fa-plus fa-fw"></i> Vaccines</a>
                             </li>
 
-                            <li>
+                            <li class="patient-info">
 
                                 <a href="#vaccinationplaces"  class="active"><i class="fa fa-location-arrow  fa-fw"></i> Vaccination places</a>
                             </li>
-                            <li>
+                            <li class="patient-info">
 
                                 <a href="#vaccination"  class="active"><i class="fa fa-heart-o  fa-fw"></i> About vaccination</a>
                             </li>
@@ -120,9 +120,7 @@
 
                             <li class="divider"></li>
 
-                            <li class="admin-staff">
-                                <a href="admin.html" class="active"><i class="fa fa-dashboard fa-fw"></i> Admin Panel</a>
-                            </li>
+
 
 
                     </div>
@@ -197,6 +195,16 @@
 
                 $(".admin-staff").remove();
                 $(".admin-staff2").remove();
+              }
+
+
+              else if (user_info.role="DOCTOR"){
+
+                $(".patient-info").remove();
+
+
+
+
               }
             }
 

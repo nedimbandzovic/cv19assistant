@@ -27,7 +27,7 @@
         <br>
 
         <input type="button" id="button" value="Select" onclick="getSelectValues();" />
-        <input type="reset" value="Return" onClick="window.location.reload(true)">
+        <input type="reset" id="rikverc" value="Return" onClick="window.location.reload(true)">
 
         </div>
 
@@ -130,6 +130,8 @@
 
   document.getElementById("VakcineMjesta").selectedIndex = 0;
 
+  $("#rikverc").hide();
+
 
 
   function getSelectValues()
@@ -152,6 +154,8 @@
 
                   $("#VakcineMjesta").hide();
                   $("#button").hide();
+                  $("#rikverc").show();
+
 
                   }
                 else if (x==2){
@@ -165,6 +169,8 @@
 
                     $("#VakcineMjesta").hide();
                     $("#button").hide();
+                    $("#rikverc").show();
+
 
                     }
               else if (x==3){
@@ -179,6 +185,7 @@
 
                       $("#VakcineMjesta").hide();
                       $("#button").hide();
+                      $("#rikverc").show();
 
 
                       }
@@ -194,6 +201,8 @@
 
                         $("#VakcineMjesta").hide();
                         $("#button").hide();
+                        $("#rikverc").show();
+
                         }
              else if (x==5){
                           toastr.success("You have selected Dom zdravlja Ilijaš");
@@ -207,6 +216,8 @@
 
                           $("#VakcineMjesta").hide();
                           $("#button").hide();
+                          $("#rikverc").show();
+
 
                           }
 
