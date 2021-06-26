@@ -28,7 +28,7 @@ static get_all(){
     bDestroy: true,
   pagingType: "simple",
 
-  responsive:true,
+  responsive:false,
 
 "language": {
          "zeroRecords": "Nothing found - sorry",
