@@ -6,6 +6,8 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
+
+        <body>
         <!-- /.row -->
         <label>Vaccination places</label>
         <select  type="text" name="Vaccines" class="form-control" id="VakcineMjesta">
@@ -43,6 +45,8 @@
         <p id="p1">Nothing is chosen now</p>
 
 
+
+
         <div class="title">
           <h2>Information and working hours</h2>
         </div>
@@ -59,10 +63,7 @@
 
 
 
-<div class="title">
-  <h2>Telephone</h2>
-</div>
-<p id="p4">Nothing is chosen now</p>
+
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -85,6 +86,10 @@
   </div>
 </div>
 
+<div class="title">
+  <h2>Telephone</h2>
+</div>
+<p id="p4">Nothing is chosen now</p>
 
 <script type="text/javascript">
 
@@ -104,7 +109,7 @@
                 if (x==1){
 
                   toastr.success("You have selected Dom zdravlja Ilidža");
-      
+
                   document.getElementById("p1").innerHTML = "Dom zdravlja Ilidža" ;
                   document.getElementById("p2").innerHTML = "Working days: 09:00 - 19:00 /Saturdays 11:00 - 15:00 / Sundays are non-working days" ;
                   document.getElementById("p3").src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2878.2433723761774!2d18.30833701546543!3d43.830051479115546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758ca3fd7b310fb%3A0x7af7c3d11d2a09f9!2sDom%20zdravlja%20Ilid%C5%BEa!5e0!3m2!1shr!2sba!4v1624551773102!5m2!1shr!2sba" ;
@@ -114,7 +119,7 @@
                   $("#button").hide();
 
                   }
-                else  if (x==2){
+                else if (x==2){
                     toastr.success("You have selected Dom zdravlja Hadžići");
                     document.getElementById("p1").innerHTML = "Dom zdravlja Hadžići" ;
                     document.getElementById("p2").innerHTML = "Working days: 09:00 - 19:00 /Saturdays 11:00 - 15:00 / Sundays are non-working days" ;
@@ -185,3 +190,4 @@
 
 
 </script>
+</body>
