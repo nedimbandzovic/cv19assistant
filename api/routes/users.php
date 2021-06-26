@@ -90,7 +90,7 @@ Flight::route('POST /login', function(){
  */
 Flight::route('POST /forgot', function(){
   $data=Flight::request()->data->getData();
-  Flight::userService()->forgot($data);
+  Flight::json(Flight::userService()->forgot($data));
 
 
 });
@@ -109,8 +109,7 @@ Flight::route('POST /forgot', function(){
  */
 Flight::route('POST /reset', function(){
   $data=Flight::request()->data->getData();
-  Flight::userService()->reset($data);
-  Flight::json(["message"=>"Password changed"]);
+  Flight::json(Flight::userService()->reset($data));
 
 
 });

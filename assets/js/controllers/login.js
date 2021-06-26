@@ -48,25 +48,33 @@ static show_Register_Form(){
 
 
       $.post("http://localhost/cv19assistant/api/forgot",forgot_info).done(function( data ){
-        console.log(data);
+
+
+
         $("#forgot-form-container").addClass("hidden");
 
-        $("#form-alert").removeClass("hidden")
+        $("#form-alert").removeClass("hidden");
 
-        $("#form-alert .alert").html(data.message);
-      }).fail(function( error ){
+        toastr.success("Recovery token has been sent to your email. Please check it. You will be redirected to the main page in 6 seconds");
+
+        setTimeout(function(){
+          window.location.replace("http://localhost/cv19assistant/login.html");
+        }, 6000);
+      }).fail(function(error){
         $("#forgot-link").prop('disabled',false);
 
         $("#forgot-form-container").addClass("hidden");
 
-        $("#form-alert").removeClass("hidden")
+        $("#form-alert").removeClass("hidden");
 
-        $("#form-alert .alert").html(error.responseJSON.message);
+        toastr.error("Recovery token has not been sent to your email due to a failure. Please check if your email is correct. You will be redirected to the main page in 6 seconds");
+        setTimeout(function(){
+   window.location.replace("http://localhost/cv19assistant/login.html");
+}, 6000);
 
       });
 
     }
-
 
 
 
@@ -141,7 +149,7 @@ $.post("api/login",login_info).done(function( data ){
   window.location="index.html";
 }).fail(function( error ){
   $("#login-link").prop('disabled',false);
-  toastr.error(error.responseJSON.message);
+  toastr.error("Login failed");
 });
 
 
@@ -173,7 +181,7 @@ static do_Change_Password(){
       window.location = "index.html";
     }).fail(function(error) {
       $("#change-link").prop('disabled',false);
-      toastr.error(error.responseJSON.message);
+      toastr.error("Password change failed");
     });
 
   }

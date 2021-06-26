@@ -204,7 +204,6 @@ public function confirm($token){
       $this->accountDao->update($db_user['account_id'], ['Password'=>$user['password']]);
       return $db_user;
     }
-
     public function registerDoctor ($user){
 
 
