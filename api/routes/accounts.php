@@ -58,6 +58,16 @@ Flight::route('GET /patients/profiles/@id', function($id){
   Flight::json(Flight::patientService()->get_by_accounts_id($id));
 });
 
+/**
+ * @OA\Get(path="/doctors/profiles/{id}", tags={"Doctors"}, security={{"ApiKeyAuth": {}}},
+ *     @OA\Parameter(type="integer", in="path", name="Account_ID", default=1, description="Id of account"),
+ *     @OA\Response(response="200", description="Fetch individual account")
+ * )
+ */
+Flight::route('GET /doctors/profiles/@id', function($id){
+  Flight::json(Flight::doctorService()->get_by_AID($id));
+});
+
 
 /**
  * @OA\Put(path="/admin/accounts/{id}", tags={ "Admin"},  security={{"ApiKeyAuth":{}}},

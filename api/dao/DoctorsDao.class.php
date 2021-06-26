@@ -10,6 +10,11 @@ class DoctorsDao extends BaseDao{
     parent::__construct("doctors");
   }
 
+  public function get_doctor_by_AID ($id){
+
+      return $this->query_unique("SELECT * FROM doctors WHERE Account_ID=:Account_ID", ["Account_ID"=>$id]);
+    }
+
 
 
 }

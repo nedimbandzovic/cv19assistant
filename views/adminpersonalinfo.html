@@ -1,0 +1,222 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+  <br>
+  <br>
+    <br>
+
+
+  <div class="text-center">
+    <img src="img/grbovi.png" style="max-width:20%;" class="rounded float-left" alt="Responsive image" id="myImg">
+    <br>
+    <br>
+    <h3 class="panel-title pull right">BOSNIA AND HERZEGOVINA</h3>
+    <br>
+    <br>
+    <h3 class="panel-title pull right">FEDERATION OF BOSNIA AND HERZEGOVINA</h3>
+    <br>
+    <br>
+    <h3 class="panel-title pull right">SARAJEVO CANTON</h3>
+
+  </div>
+  <br>
+
+
+
+      <div class="row">
+
+
+      <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+
+
+
+
+
+      </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+
+
+
+
+
+          <div class="panel panel-info">
+
+            <div class="panel-heading">
+              <h3 class="panel-title">ADMIN / DOCTOR INFORMATION</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="img/qr-code.png" class=" img-responsive"> </div>
+
+                <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
+                  <dl>
+                    <dt>DEPARTMENT:</dt>
+                    <dd>Administrator</dd>
+                    <dt>HIRE DATE</dt>
+                    <dd>11/12/2013</dd>
+                    <dt>DATE OF BIRTH</dt>
+                       <dd>11/12/2013</dd>
+                    <dt>GENDER</dt>
+                    <dd>Male</dd>
+                  </dl>
+                </div>-->
+                <div class=" col-md-9 col-lg-9 ">
+                  <table class="table table-user-information" ">
+                    <tbody>
+                      <tr>
+                        <td>Name and surname:</td>
+                        <td id="adminname">Programming</td>
+                      </tr>
+                      <tr>
+                        <td>Institution Name</td>
+                        <td id="institutionname" >06/23/2013</td>
+                      </tr>
+                      <tr>
+                        <td>Institution Position</td>
+                        <td id="institutionposition">01/24/1988</td>
+                      </tr>
+
+                         <tr>
+                             <tr>
+                        <td>Phone Number</td>
+                        <td id="adminphonenumber">Female</td>
+                      </tr>
+                        <tr>
+                        <td>JMBG</td>
+                        <td id="adminjmbg">Kathmandu,Nepal</td>
+                      </tr>
+
+
+
+
+
+                    </tbody>
+                  </table>
+
+                  <button type="button" onclick="createPDF()" name="button">Print your ID certificate</button>
+
+                  <br>
+                  <br>
+
+
+
+
+                    <script type="text/javascript">
+
+                      $(document).ready(function() {
+                    var user_info = CSUtils.parse_jwt(window.localStorage.getItem("token"));
+                    getProfiles();
+
+                });
+
+                function getProfiles(){
+                  var user_info = CSUtils.parse_jwt(window.localStorage.getItem("token"));
+                  var id= user_info.account_id;
+
+                  console.log(id);
+
+
+                  $.ajax({
+                     url: 'http://localhost/cv19assistant/api/doctors/profiles/' + id,
+                     type: 'GET',
+                     beforeSend: function(xhr){
+                       if (localStorage.getItem("token")){ // optional header token due login and other endpoints
+                         xhr.setRequestHeader('Authorization', localStorage.getItem("token"));
+                       }
+
+                     },
+                     async: false,
+                     cache: false,
+                     timeout: 30000,
+                     fail: function(){
+                         return true;
+                     },
+
+                     success: function(data) {
+
+                       console.log(data);
+
+                       document.getElementById("adminname").innerHTML = data.Name;
+
+                      document.getElementById("institutionname").innerHTML = data.InstitutionName;
+                      document.getElementById("institutionposition").innerHTML = data.InstitutionPosition;
+                      document.getElementById("adminphonenumber").innerHTML = data.PhoneNumber;
+                      document.getElementById("adminjmbg").innerHTML = data.JMBG;
+
+
+
+}
+
+
+                 });
+                }
+
+
+
+                function generateRandomInteger(max) {
+      return Math.floor(Math.random() * max) + 10000;
+}
+
+function createPDF( ){
+
+  var doc=new jsPDF();
+  var img4 = new Image();
+  img4.src = 'img/grbovi.png'
+  var img23 = new Image();
+  img23.src = 'img/qr-code.png'
+  let value2 = generateRandomInteger(100000);
+
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var dateTime = date+' '+time;
+
+  doc.addImage(img4, 'PNG', 10, 10, 30, 15);
+  doc.text("Bosnia and Herzegovina",10, 40);
+  doc.text("Federation of Bosnia and Herzegovina",10, 50);
+  doc.text("Sarajevo Canton",10, 60);
+
+
+  doc.text("DOCTOR ID CERTIFICATE",10, 100);
+  doc.text("Name and surname: " + document.getElementById("adminname").innerHTML,10, 120);
+  doc.text("Institution Name: " + document.getElementById("institutionname").innerHTML,10, 130);
+  doc.text("Institution Position: " + document.getElementById("institutionposition").innerHTML,10, 140);
+  doc.text("Phone Number: " + document.getElementById("adminphonenumber").innerHTML,10, 150);
+  doc.text("JMBG: " + document.getElementById("adminjmbg").innerHTML,10, 160);
+  doc.addImage(img23, 'PNG', 10, 190, 30, 30);
+
+  doc.text("Use this QR code as identification tool at the vaccination center",10, 230);
+
+  doc.text("Certificate ID: " + value2 ,10, 240);
+
+  doc.text("Issued on: " + dateTime ,10, 270);
+
+  doc.text("(C) 2021 Coronavirus Assistant" ,10, 287);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  doc.text(document.getElementById("name").innerHTML, 10,10);
+  //doc.text(document.getElementById("Country").innerHTML, 25, 25);
+  doc.save("COVID-19DoctorID.pdf");
+
+}
+
+
+
+                  </script>

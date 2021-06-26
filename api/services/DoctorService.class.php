@@ -28,4 +28,10 @@ class DoctorService extends BaseService{
     return parent::add($account);
   }
 
+  public function get_by_AID($id){
+
+    return $this->dao->get_doctor_by_AID($id);
+
+  }
+
 }
